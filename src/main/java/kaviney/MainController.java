@@ -33,6 +33,30 @@ public class MainController {
 		return "Saved";
 	}
 	
+	@GetMapping(path="/changestatus") // Map ONLY GET Requests
+	public @ResponseBody String keistiBusena (
+			@RequestParam String busena
+			, @RequestParam Integer id
+			) {
+		// @ResponseBody means the returned String is the response, not a view name
+		// @RequestParam means it is a parameter from the GET or POST request
+		
+		Optional <Uzsakymai> found = uzsakymaiRepository.findById( id );
+		
+		String res = "Not done";
+		
+		if ( found.isPresent() ) {
+			
+			   Uzsakymai n = found.get();
+			   n.setId(id);
+			   n.setBusena(busena);	
+			   uzsakymaiRepository.save(n);	
+			   res = "Saved";
+			}		
+	
+		return res;
+	}	
+	
 	@GetMapping(path="/all")
 	public @ResponseBody Iterable<Uzsakymai> getAllUzsakymai() {
 		// This returns a JSON or XML with the users

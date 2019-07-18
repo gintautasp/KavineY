@@ -12,11 +12,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class GreetingController {
 
-    @GetMapping("/greeting")
+    @GetMapping("/uzsakymai")
     public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
         model.addAttribute("name", name);
-        return "greeting";
+        return "uzsakymai";
     }
+    
+    @GetMapping("/uzsakymaic")
+    public String uzsakymaix(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
+        model.addAttribute("name", name);
+        return "uzsakymai";
+    }    
     
     @RequestMapping("/simple")
     public @ResponseBody String greeting() {

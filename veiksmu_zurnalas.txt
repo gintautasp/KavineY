@@ -1,0 +1,44 @@
+﻿1. generuojame projekt1 su spring initializer start.spring.io:
+Group
+ernadas
+Artifact
+keviney
+Options
+	Name
+	kaviney
+	Description
+	Kavine RESTfull veikimas
+	Package Name
+	kaviney
+	Packaging
+	War
+2. uzsikeliam failus is SpringWebDbRestExample ir pasipildom pom.xml dependencies
+	-- git - pradine versija tik RESTfull ir html
+3.
+	su eclipse Refractor -> rename pervardinam:
+		User.java į Uzsakymai.java
+		UserRepository.java į UzsakymaiRepository.java
+		
+		paredaguojam 
+			Uzsakymai.java
+				seterius ir geterius, pagal mūsų kavine.uzsakymai lentelę
+				11 eilutė   keičiasi į  @GeneratedValue(strategy=GenerationType.IDENTITY)
+			MainController 
+					14-a eilute @RequestMapping(path="/restfull")
+				ir 
+					keičiamas metodas addNewUser į naujasUzsakymas pagal mūsų lentelės uzsakymai poreikius (žr. git keitimus)
+
+	-- git - pakeisti RESTfull veiksmai pagal kavine.uzsakymai lentelę	
+	
+4.	perdarom uzsakymai.html failą
+	kuriame naują metodą MainController.java klasėje:
+		@GetMapping(path="/changestatus") // Map ONLY GET Requests
+		public @ResponseBody String keistiBusena (
+		..
+	perdarom lentelę uzsakymai
+		ALTER TABLE `uzsakymai` 
+			ADD `busena` ENUM('uzsakytas','anuliuotas','ivykdytas') NOT NULL DEFAULT 'uzsakytas' 
+			AFTER `trukme_kaitinimo`
+		;
+
+	-- git - peržiūra, pridejimas ir anuliavimas(anuliavimas dar neveikia)

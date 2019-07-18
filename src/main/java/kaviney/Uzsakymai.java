@@ -16,6 +16,8 @@ public class Uzsakymai {
     private Integer trukme_ruosimo;
     
     private Integer trukme_kaitinimo;
+    
+    private String busena;
 
 	public Integer getId() {
 		return id;
@@ -48,6 +50,13 @@ public class Uzsakymai {
 	public void setTrukme_kaitinimo(Integer trukme_kaitinimo) {
 		this.trukme_kaitinimo = trukme_kaitinimo;
 	}	
-    
+	
+	public String getBusena() {
+		return busena;
+	}
+
+	public void setBusena(String busena) {
+		this.busena = busena;
+	}
 }
 
