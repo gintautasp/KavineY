@@ -2,11 +2,11 @@ package kaviney;
 
 import org.springframework.data.repository.CrudRepository;
 
-import kaviney.User;
+import kaviney.Uzsakymai;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
 // CRUD refers Create, Read, Update, Delete
 
-public interface UserRepository extends CrudRepository<User, Integer> {
+public interface UzsakymaiRepository extends CrudRepository<Uzsakymai, Integer> {
 
 }
