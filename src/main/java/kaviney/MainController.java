@@ -1,6 +1,8 @@
 package kaviney;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +12,8 @@ import java.util.Optional;
 
 import kaviney.Uzsakymai;
 import kaviney.UzsakymaiRepository;
+
+import kavinex.*;
 
 @Controller    // This means that this class is a Controller
 @RequestMapping(path="/restfull") // This means URL's start with /demo (after Application path)
@@ -65,4 +69,18 @@ public class MainController {
 		// This returns a JSON or XML with the users
 		return uzsakymaiRepository.findAll();
 	}
+	
+	@GetMapping(path="/allx")
+	public @ResponseBody Iterable<Patiekalas> getAllUzsakymaix() {
+		// This returns a JSON or XML with the users
+		ApplicationContext context = new ClassPathXmlApplicationContext( "file:src/beans.xml" );
+		
+		UzsakymaiSpring uzsakymai = (UzsakymaiSpring) context.getBean( "uzsakymai" );
+		uzsakymai.nuskaityti(); // tik ivedimas
+		uzsakymai.ruostiPatiekalus();
+		uzsakymai.patiekti();
+		;		
+		
+		return uzsakymai.isnesiotix();
+	}	
 }
