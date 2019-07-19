@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Užsakymai</title>
+    <title>U�sakymai</title>
     <meta charset="utf-8">
 		<style>
 			.anuliuotas, .sanuliuotas {
@@ -54,8 +54,8 @@
 					function( data ) {
 															// alert ( 'jquery ok ' + data );
 						res_str = '<table>'
-								+ '<tr><th rowspan="2">id</th><th rowspan="2">pav</th><th colspan="2">trukmė</th></tr>'
-								+ '<tr><th>ruošimo</th><th>kaitinimo</th><th>veiksmas</th></tr>';
+								+ '<tr><th rowspan="2">id</th><th rowspan="2">pav</th><th colspan="2">trukme</th></tr>'
+								+ '<tr><th>ruo�imo</th><th>kaitinimo</th><th>veiksmas</th></tr>';
 						
 						for ( i = 0; i < data.length; i++) {
 						
@@ -70,7 +70,7 @@
 								res_str +=
 								
 									'<td><input type="button" class="anuliuotas" value="anuliuotas"></td>'
-									+ '<td><input type="button" class="ivykdytas" value="įvykdytas"></td>'
+									+ '<td><input type="button" class="ivykdytas" value="ivykdytas"></td>'
 							}
 							res_str += '</tr>';
 						}
@@ -139,11 +139,11 @@
 	<form action="">
 		Patiekalo pavadinimas<br>
 		<input type="text" id="pav" value=""><br><br>
-		Trukmė ruošimo<br>
+		Trukme ruo�imo<br>
 		<input type="text" id="trukme_ruosimo" value=""><br><br>
-		Trukmė kaitinimo<br>
+		Trukme kaitinimo<br>
 		<input type="text" id="trukme_kaitinimo" value=""><br><br>
-		<input type="button" id="naujas_uzsakymas" value="Užsakyti">
+		<input type="button" id="naujas_uzsakymas" value="U�sakyti">
 	</form>
 	<div id="uzsakymai">
 	</div>

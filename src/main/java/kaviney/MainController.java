@@ -44,6 +44,9 @@ public class MainController {
 		
 		Optional <Uzsakymai> found = uzsakymaiRepository.findById( id );
 		
+		// variantas trynimuiui
+		// uzsakymaiRepository.deleteById(id);
+		
 		String res = "Not done";
 		
 		if ( found.isPresent() ) {
@@ -54,7 +57,6 @@ public class MainController {
 			   uzsakymaiRepository.save(n);	
 			   res = "Saved";
 			}		
-	
 		return res;
 	}	
 	
