@@ -3,6 +3,14 @@
 <head>
     <title>Užsakymai</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<style>
+			.anuliuotas, .sanuliuotas {
+				background-color: lightblue;
+			}
+			.ivykdytas, .sivykdytas {
+				background-color: lightgreen;
+			}
+		</style>
 	    <script
 		src="https://code.jquery.com/jquery-3.4.1.min.js"
 		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -19,7 +27,7 @@
 		
 			$.ajax(
 				{
-					url: "http://localhost:8080/restfull/change_status?" + params_str
+					url: "http://localhost:8080/restfull/changestatus?" + params_str
 				}
 			)
 			.done( function( data ) {
@@ -51,14 +59,20 @@
 						
 						for ( i = 0; i < data.length; i++) {
 						
-							res_str += '<tr data-id="' + data [ i ].id  +'" >'
+							res_str += '<tr class="s' + data [ i ].busena  + '" data-id="' + data [ i ].id  +'" >'
 								+ '<td>' + data [ i ].id + '</td>' 
 								+ '<td>' + data [ i ].pav + '</td>'
 								+ '<td>' + data [ i ].trukme_ruosimo + '</td>'
 								+ '<td>' + data [ i ].trukme_kaitinimo + '</td>'
-								+ '<td><input type="button" class="anuliuotas" value="anuliuotas"></td>'
-								+ '<td><input type="button" class="ivykdytas" value="įvykdytas"></td>'
-							+ '</tr>';
+								;
+							if ( data [ i ].busena == 'uzsakytas' ) {	
+							
+								res_str +=
+								
+									'<td><input type="button" class="anuliuotas" value="anuliuotas"></td>'
+									+ '<td><input type="button" class="ivykdytas" value="įvykdytas"></td>'
+							}
+							res_str += '</tr>';
 						}
 						
 						res_str += '</table>'
@@ -88,12 +102,14 @@
 				, trukme_kaitinimo: parseInt ( $( '#trukme_kaitinimo' ).val() )
 			}
 			
-			alert ( 'uzsakymas  ' + uzsakymas );
+			// alert ( 'uzsakymas  ' + uzsakymas.pav + ' ' );
 			
 			params_str = 
 				"pav="  + uzsakymas.pav 
 				+ '&trukme_ruosimo=' + uzsakymas.trukme_ruosimo 
 				+ '&trukme_kaitinimo=' + uzsakymas.trukme_kaitinimo 
+				
+			alert ( "http://localhost:8080/restfull/add?" + params_str );
 				
 			$.ajax(
 				{

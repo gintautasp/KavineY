@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import java.util.Optional;
 
 import kaviney.Uzsakymai;
 import kaviney.UzsakymaiRepository;
@@ -29,14 +30,14 @@ public class MainController {
 		n.setPav(pav);
 		n.setTrukme_ruosimo(trukme_ruosimo);
 		n.setTrukme_kaitinimo(trukme_kaitinimo);
+		n.setBusena( "uzsakytas" );
 		uzsakymaiRepository.save(n);
 		return "Saved";
 	}
 	
 	@GetMapping(path="/changestatus") // Map ONLY GET Requests
-	public @ResponseBody String keistiBusena (
-			@RequestParam String busena
-			, @RequestParam Integer id
+	public @ResponseBody String keistiBusena (@RequestParam String busena
+			, @RequestParam Integer id 
 			) {
 		// @ResponseBody means the returned String is the response, not a view name
 		// @RequestParam means it is a parameter from the GET or POST request

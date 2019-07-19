@@ -35,7 +35,7 @@ Options
 		@GetMapping(path="/changestatus") // Map ONLY GET Requests
 		public @ResponseBody String keistiBusena (
 		..
-	perdarom lentelę uzsakymai
+	perdarom lentelę uzsakymai:
 		ALTER TABLE `uzsakymai` 
 			ADD `busena` ENUM('uzsakytas','anuliuotas','ivykdytas') NOT NULL DEFAULT 'uzsakytas' 
 			AFTER `trukme_kaitinimo`
