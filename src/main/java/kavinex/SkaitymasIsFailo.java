@@ -25,6 +25,11 @@ public class SkaitymasIsFailo implements Skaitymas {
 		this.vardas_failo = vardas_failo;
 	}
 	
+	public void setFile_line ( String file_line ) {
+		
+		this.file_line = file_line;
+	}
+	
 	public void pradeti() {
 		
 		try {
@@ -85,20 +90,35 @@ public class SkaitymasIsFailo implements Skaitymas {
 		
 		Uzsakymas uzsakymas = new Uzsakymas(); 
 		
-		uzsakymas.setPav(langeliai[0]);
+		uzsakymas.setPav ( langeliai [ 0 ] );
 		uzsakymas.setTrukme_ruosimo ( 0 );
 		uzsakymas.setTrukme_kaitinimo ( 0 );
 		
-		if ( langeliai.length > 1 ) {
+		try {
 		
-			uzsakymas.setTrukme_ruosimo ( Integer.parseInt( langeliai [ 1 ] ) );		
+			if ( langeliai.length > 1 ) {
+			
+				uzsakymas.setTrukme_ruosimo ( Integer.parseInt( langeliai [ 1 ] ) );		
+			}
+			
+		} catch ( Exception e ) {
+			
+			uzsakymas.setTrukme_ruosimo ( -1 );
+		}			
+			
+		try {
+			
+	
+			if ( langeliai.length > 2 ) {
+	
+				uzsakymas.setTrukme_kaitinimo ( Integer.parseInt( langeliai [ 2 ] ) );
+			}
+			
+		} catch ( Exception e ) {	
+			
+			uzsakymas.setTrukme_kaitinimo ( -1 );
 		}
-		
-		if ( langeliai.length > 2 ) {
-
-			uzsakymas.setTrukme_kaitinimo ( Integer.parseInt( langeliai [ 2 ] ) );
-		}		
-		
+	
 		return uzsakymas;
 	}
 }

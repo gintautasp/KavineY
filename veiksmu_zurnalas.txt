@@ -42,3 +42,6 @@ Options
 		;
 
 	-- git - peržiūra, pridejimas ir anuliavimas(anuliavimas dar neveikia)
+
+5. 	importuojam java.util.Optional kad veiktu anuliavimas, redaguojam 
+	

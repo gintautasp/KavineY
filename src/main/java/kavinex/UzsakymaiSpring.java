@@ -44,34 +44,43 @@ public class UzsakymaiSpring {
 			
 			was_read = skait.paimtiFragmenta();
 			
-			if ( was_read.getTrukme_ruosimo() == 0 ) {
-				
-				patiekalai [ kiek_patiekalu ] = new Patiekalas ( was_read.getPav() );
-				
-			} else {
-				
-				if ( was_read.getTrukme_kaitinimo() == 0) {
-					
-					patiekalai [ kiek_patiekalu ] = new RuosiamasPatiekalas (
-							
-							was_read.getPav()
-							, was_read.getTrukme_ruosimo() 
-					);
-					
-				} else {
-					
-					patiekalai [ kiek_patiekalu ] = new KarstasPatiekalas (
-							
-						was_read.getPav()
-						, was_read.getTrukme_ruosimo()
-						, was_read.getTrukme_kaitinimo() 
-					);						
-				}
-			}
+			patiekalai [ kiek_patiekalu ] = uzsakymas2Patiekalas ( was_read );
+			
 			kiek_patiekalu++;
 			skait.skaitytiFragmenta();
 		}	
-	}	
+	}
+	
+	public Patiekalas uzsakymas2Patiekalas ( Uzsakymas was_read ) {
+		
+		Patiekalas patiekalas;
+		
+		if ( was_read.getTrukme_ruosimo() == 0 ) {
+			
+			patiekalas = new Patiekalas ( was_read.getPav() );
+			
+		} else {
+			
+			if ( was_read.getTrukme_kaitinimo() == 0) {
+				
+				patiekalas = new RuosiamasPatiekalas (
+						
+						was_read.getPav()
+						, was_read.getTrukme_ruosimo() 
+				);
+				
+			} else {
+				
+				patiekalas = new KarstasPatiekalas (
+						
+					was_read.getPav()
+					, was_read.getTrukme_ruosimo()
+					, was_read.getTrukme_kaitinimo() 
+				);						
+			}
+		}
+		return patiekalas;
+	}
 	
 	
 	/**

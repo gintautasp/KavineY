@@ -6,6 +6,47 @@ public class Uzsakymas {
 	private String pav;
 	private int trukme_ruosimo;
 	private int trukme_kaitinimo;
+	
+	public Uzsakymas() {
+		
+	}
+	
+	public Uzsakymas (String pav, int trukme_ruosimo, int trukme_kaitinimo) {
+		
+		this.id = 0;
+		this.pav = pav;
+		this.trukme_kaitinimo = trukme_kaitinimo;
+		this.trukme_ruosimo = trukme_ruosimo;
+	}
+	
+	public boolean isCorrect() {
+		
+		boolean is_correct = true;
+		
+		if ( 
+					( trukme_ruosimo < 0 )
+				||
+					( trukme_kaitinimo < 0 )
+			) {
+			
+			is_correct = false;
+		}
+		return is_correct;
+	}
+	
+	public boolean equals(Object obj){
+    	
+        Uzsakymas palyginimui = (Uzsakymas) obj;
+        boolean status = false;
+        
+        if(
+        		this.pav.equalsIgnoreCase(palyginimui.pav)
+                && this.trukme_ruosimo == palyginimui.trukme_ruosimo 
+                && this.trukme_kaitinimo == palyginimui.trukme_kaitinimo ){
+            status = true;
+        }
+        return status;
+    }	
 
 	public void setId( int id ) {
 		
