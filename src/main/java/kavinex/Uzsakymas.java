@@ -19,6 +19,15 @@ public class Uzsakymas {
 		this.trukme_ruosimo = trukme_ruosimo;
 	}
 	
+	public String toString() {
+		
+		return 
+			this.id 
+				+ "/" + this.pav 
+				+ "/" + this.trukme_ruosimo
+				+ "/" + this.trukme_kaitinimo
+			;
+	}
 	public boolean isCorrect() {
 		
 		boolean is_correct = true;

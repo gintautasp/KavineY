@@ -53,30 +53,37 @@ public class UzsakymaiSpring {
 	
 	public Patiekalas uzsakymas2Patiekalas ( Uzsakymas was_read ) {
 		
-		Patiekalas patiekalas;
+		Patiekalas patiekalas = null;
 		
-		if ( was_read.getTrukme_ruosimo() == 0 ) {
-			
-			patiekalas = new Patiekalas ( was_read.getPav() );
-			
-		} else {
-			
-			if ( was_read.getTrukme_kaitinimo() == 0) {
+		if ( was_read.isCorrect() ) {
+		
+			if ( 
+						was_read.getTrukme_ruosimo() == 0 
+					&&
+						was_read.getTrukme_kaitinimo() == 0
+				) {
 				
-				patiekalas = new RuosiamasPatiekalas (
-						
-						was_read.getPav()
-						, was_read.getTrukme_ruosimo() 
-				);
+				patiekalas = new Patiekalas ( was_read.getPav() );
 				
 			} else {
 				
-				patiekalas = new KarstasPatiekalas (
-						
-					was_read.getPav()
-					, was_read.getTrukme_ruosimo()
-					, was_read.getTrukme_kaitinimo() 
-				);						
+				if ( was_read.getTrukme_kaitinimo() == 0 ) {
+					
+					patiekalas = new RuosiamasPatiekalas (
+							
+							was_read.getPav()
+							, was_read.getTrukme_ruosimo() 
+					);
+					
+				} else {
+					
+					patiekalas = new KarstasPatiekalas (
+							
+						was_read.getPav()
+						, was_read.getTrukme_ruosimo()
+						, was_read.getTrukme_kaitinimo() 
+					);						
+				}
 			}
 		}
 		return patiekalas;

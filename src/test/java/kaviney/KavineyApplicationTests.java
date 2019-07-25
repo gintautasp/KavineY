@@ -30,6 +30,10 @@ public class KavineyApplicationTests {
 		   , "Trijų sūrių Pica,15,iks"							// 7		   
 		   , "Saltibarsciai su bulvemis,xyz,5"					// 8
 		   , "Saltibarsciai,xyz,5ccc"							// 9
+		   , ""													// 10
+		   , "   "												// 11
+		   , "1"												// 12	
+		   , "Saltibarsciai su bulvemis,-1,5"					// 13		   
 		};
 		
 		kavinex.Uzsakymas[] uzsakymai = {
@@ -44,6 +48,10 @@ public class KavineyApplicationTests {
 			, new kavinex.Uzsakymas ( "Trijų sūrių Pica", 15, -1 )				// 7
 			, new kavinex.Uzsakymas ( "Saltibarsciai su bulvemis", -1, 5 )		// 8
 			, new kavinex.Uzsakymas ( "Saltibarsciai", -1, -1 )					// 9
+			, null																// 10
+			, null																// 11
+			, new kavinex.Uzsakymas ( "1", 0, 0 )								// 12
+			, new kavinex.Uzsakymas ( "Saltibarsciai su bulvemis", -1, 5 )	    // 13				
 		};
 
 		String[] tikrinimai = {
@@ -58,6 +66,10 @@ public class KavineyApplicationTests {
 			, "Tikrinimas, kai antra trukmė ne skaičiai, bet pirmos trukmė skaičiai" 	// 7						
 			, "Tikrinimas, kai pirma trukmė ne skaičiai, bet antra trukmė skaičius" 	// 8						
 			, "Tikrinimas, kai abi trukmės ne skaičiai, bet antros trukmė prasideda skaičiais" 		// 9
+			, "Tikrinimas, kai tuščia eilutė" 											// 10						
+			, "Tikrinimas, kai eilutė iš tarpų" 										// 11						
+			, "Tikrinimas, kai eilutė tik skaičius" 									// 12
+			, "Tikrinimas, kai iš karto bloga ruošimo trukmė "							// 13
 		};
 		
 		SkaitymasIsFailo dsf = new SkaitymasIsFailo();
@@ -67,8 +79,64 @@ public class KavineyApplicationTests {
 			dsf.setFile_line ( uzsakymu_eilutes [ i ] );
 			assertEquals (
 				tikrinimai [ i ]
-				, dsf.paimtiFragmenta()
 				, uzsakymai [ i ]
+				, dsf.paimtiFragmenta()		
+			);
+		}
+	}
+	
+	@Test
+	public void testPatiekaluFormavimas() {
+		
+		Uzsakymas[] uzsakymai = {
+				
+			new Uzsakymas ( "Ledai", 0, 0 )								// 0
+			, new Uzsakymas ( "Tortilija su falafeliais", 20, 5 ) 		// 1
+			, new Uzsakymas ( "Cezario salotos", 15, 0 )				// 2			
+			, new Uzsakymas ( "Kava Late", -1, -1 )						// 3
+			, new Uzsakymas ( "Trijų sūrių Pica", 0, 10)				// 4
+			, new Uzsakymas ( "Saltibarsciai su bulvemis", -1, 5 )		// 5
+		};
+
+		String[] tikrinimai = {
+				
+			"Tikrinimas, kai nurodytos nulinės abiejų trukmių reikšmės"			// 0
+			, "Tikrinimas, kai nurodytos nenulinės abiejų trukmių reikšmės" 			// 2
+			, "Tikrinimas, kai nurodyta, tik trukmė ruošimo"							// 3
+			, "Tikrinimas, kai abi trukmės neteisingos"									// 5
+			, "Tikrinimas, kai yra trukmė kaitinimo, bet nėra trukmės ruošimo" 			// 6
+			, "Tikrinimas, kai trukmė ruošimo yra neteisinga"						 	// 7						
+		};	
+		
+		Patiekalas[] patiekalai = {
+				
+			new Patiekalas ( "Ledai" )								// 0
+			, new KarstasPatiekalas ( "Tortilija su falafeliais", 20, 5 ) 	// 1
+			, new RuosiamasPatiekalas ( "Cezario salotos", 15 )		// 2			
+			, null													// 3
+			, new KarstasPatiekalas ( "Trijų sūrių Pica", 0, 10 )	// 4
+			, null												    // 5
+		};		
+		
+		UzsakymaiSpring uzsak = new UzsakymaiSpring();	
+
+		for ( int i = 0; i < uzsakymai.length; i++ ) {
+			/*
+			System.out.println ( uzsakymai [ i ].toString() );
+			
+			if ( patiekalai [ i ] != null ) {
+				
+				System.out.println ( patiekalai [ i ].toString() );
+				
+			} else {
+				
+				System.out.println ( "null" );
+			}
+			*/
+			assertEquals (
+				tikrinimai [ i ]
+				, uzsak.uzsakymas2Patiekalas( uzsakymai [ i ])
+				, patiekalai [ i ]
 			);
 		}
 	}

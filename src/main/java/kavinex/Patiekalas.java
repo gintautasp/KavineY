@@ -46,6 +46,33 @@ public class Patiekalas {
 		return this.patiekimo_laikas; 
 	}
 	
+	public boolean equals(Object obj){
+		
+        Patiekalas palyginimui = (Patiekalas) obj;
+        boolean status = false;
+        
+        if(
+        		this.pavadinimas.equalsIgnoreCase(palyginimui.pavadinimas)
+              &&  
+              	papildomiPalyginimai ( obj )
+              	
+        		){
+        	
+            status = true;
+        }
+        return status;
+	}
+	
+	public String toString() {
+		
+		return this.pavadinimas + ";";
+	}
+	
+	public boolean papildomiPalyginimai ( Object obj ) {
+		
+		return true;
+	}
+	
 	public void rodyk() {
 		
 		System.out.println ( "\t" + pavadinimas + " -> " + bus_paruostas_uz + " / " + bus_patiektas_apytiksliai_uz + " min." );

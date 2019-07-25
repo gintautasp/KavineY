@@ -88,35 +88,40 @@ public class SkaitymasIsFailo implements Skaitymas {
 		// System.out.println( "\t" + was_read );
 		String[] langeliai = this.file_line.split ( "," );
 		
-		Uzsakymas uzsakymas = new Uzsakymas(); 
+		Uzsakymas uzsakymas = null;
 		
-		uzsakymas.setPav ( langeliai [ 0 ] );
-		uzsakymas.setTrukme_ruosimo ( 0 );
-		uzsakymas.setTrukme_kaitinimo ( 0 );
+		if ( ! this.file_line.trim().equals("") ) { 
 		
-		try {
-		
-			if ( langeliai.length > 1 ) {
+			uzsakymas = new Uzsakymas(); 
 			
-				uzsakymas.setTrukme_ruosimo ( Integer.parseInt( langeliai [ 1 ] ) );		
+			uzsakymas.setPav ( langeliai [ 0 ] );
+			uzsakymas.setTrukme_ruosimo ( 0 );
+			uzsakymas.setTrukme_kaitinimo ( 0 );
+			
+			try {
+			
+				if ( langeliai.length > 1 ) {
+				
+					uzsakymas.setTrukme_ruosimo ( Integer.parseInt( langeliai [ 1 ] ) );		
+				}
+				
+			} catch ( Exception e ) {
+				
+				uzsakymas.setTrukme_ruosimo ( -1 );
+			}			
+				
+			try {
+				
+		
+				if ( langeliai.length > 2 ) {
+		
+					uzsakymas.setTrukme_kaitinimo ( Integer.parseInt( langeliai [ 2 ] ) );
+				}
+				
+			} catch ( Exception e ) {	
+				
+				uzsakymas.setTrukme_kaitinimo ( -1 );
 			}
-			
-		} catch ( Exception e ) {
-			
-			uzsakymas.setTrukme_ruosimo ( -1 );
-		}			
-			
-		try {
-			
-	
-			if ( langeliai.length > 2 ) {
-	
-				uzsakymas.setTrukme_kaitinimo ( Integer.parseInt( langeliai [ 2 ] ) );
-			}
-			
-		} catch ( Exception e ) {	
-			
-			uzsakymas.setTrukme_kaitinimo ( -1 );
 		}
 	
 		return uzsakymas;
