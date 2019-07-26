@@ -142,6 +142,80 @@ public class KavineyApplicationTests {
 	}
 	
 	@Test
+	public void testParuosti() {
+	/*	
+									ruoš.	šild.	laikas virėjo	paruoštas tiekti	gaus klientas
+		Ledai																			2	
+		Kava Juoda																		4	
+		Tortilija su falafeliais	20		5		20				25					27	
+		Cezario salotos				15		35		35				37	
+		Kremine pievagrybiu sriuba	10		5		45				50					52	
+		Obuoliu pyragas su braskemis													6	
+		Kava Late																		8	
+		Humus Pica					15		8		60				68					70	
+		Saltibarsciai su bulvemis	15		5		75				80					82	
+		Bulviniai blynai			10		15		85				100					102	
+		Vaisine arbata																	10	
+		Blyneliai su bananais		15		10		100				110					112	
+*/		
+		int kiek_patiekalu = 12;	
+		
+		Patiekalas[] etalonas = {
+				
+				 new Patiekalas ( "Ledai" )
+				 , new Patiekalas ( "Kava Juoda" )
+				 , new KarstasPatiekalas ( "Tortilija su falafeliais", 20, 5 )		
+				 , new RuosiamasPatiekalas ( "Cezario Salotos", 15 )
+				 
+				 , new KarstasPatiekalas ( "Kremine pievagrybiu sriuba", 10, 5 )
+				 , new Patiekalas ( "Obuoliu pyragas su braskemis" )
+				 , new Patiekalas ( "Kava Late" )
+				 
+				 , new KarstasPatiekalas ( "Humus Pica", 15, 8 )
+				 , new KarstasPatiekalas ( "Saltibarsciai su bulvemis", 15, 5 )						
+				 , new KarstasPatiekalas ( "Bulviniai blynai", 10, 15 )
+				 
+				 , new Patiekalas ( "Vaisine arbata" )
+				 , new KarstasPatiekalas ( "Blyneliai su bananais", 15, 10 )
+		};
+
+		
+		/**
+		 * norėtusi taip dariti, bet nerizikuojam, nes greičiausiai, operuos su tuo pačiu patiekalu 
+		 *
+		for ( int i= 0; i< kiek_patiekalu; i++) {
+		
+			uzsak.papildytiPatiekalus( new Patiekalas ( "Kava Juoda" ) );
+		}
+		*/
+		int[] laikas_virejo = { 0, 0, 20,  35, 45, 0,   0, 60, 75,   85, 0, 100 };
+
+		for ( int i= 0; i< kiek_patiekalu; i++) {
+			
+			etalonas[ i ].setTrukmeRuosimo( laikas_virejo [ i ] );
+		}		
+		
+		UzsakymaiSpring uzsak = new UzsakymaiSpring( kiek_patiekalu );		
+		uzsak.papildytiPatiekalus( new Patiekalas ( "Ledai" ) );		
+		uzsak.papildytiPatiekalus( new Patiekalas ( "Kava Juoda" ) );
+		uzsak.papildytiPatiekalus( new KarstasPatiekalas ( "Tortilija su falafeliais", 20, 5 ) );		
+		uzsak.papildytiPatiekalus( new RuosiamasPatiekalas ( "Cezario Salotos", 15 ) );
+		uzsak.papildytiPatiekalus( new KarstasPatiekalas ( "Kremine pievagrybiu sriuba", 10, 5 ) );
+		
+		uzsak.papildytiPatiekalus( new Patiekalas ( "Obuoliu pyragas su braskemis" ) );
+		uzsak.papildytiPatiekalus( new Patiekalas ( "Kava Late" ) );		
+		uzsak.papildytiPatiekalus( new KarstasPatiekalas ( "Humus Pica", 15, 8 ) );
+		uzsak.papildytiPatiekalus( new KarstasPatiekalas ( "Saltibarsciai su bulvemis", 15, 5 ) );	
+		
+		uzsak.papildytiPatiekalus( new KarstasPatiekalas ( "Bulviniai blynai", 10, 15 ) );		
+		uzsak.papildytiPatiekalus( new Patiekalas ( "Vaisine arbata" ) );
+		uzsak.papildytiPatiekalus( new KarstasPatiekalas ( "Blyneliai su bananais", 15, 10 ) );		
+		uzsak.ruostiPatiekalus();
+		
+		assertArrayEquals ( etalonas, uzsak.atiduokPatiekalus() );
+	}
+	
+	@Test
 	public void testIsnesioti() {
 
         /**

@@ -18,10 +18,7 @@ public class KarstasPatiekalas extends RuosiamasPatiekalas {
 	public String toString() {
 		
 		return 
-				this.pavadinimas 
-			+ 	"/" 
-			+ 	this.trukme_ruosimo 
-			+ 	"/" 
+			super.toString() 
 			+ 	this.trukme_kaitinimo 
 			+ 	";"
 		;

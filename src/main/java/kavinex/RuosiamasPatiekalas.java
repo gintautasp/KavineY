@@ -44,7 +44,7 @@ public class RuosiamasPatiekalas extends Patiekalas {
 	
 	public String toString() {
 		
-		return this.pavadinimas + "/" + this.trukme_ruosimo + ";";
+		return super.toString() + this.trukme_ruosimo + ";";
 	}	
 
 	public int trukmeRuosimo() {

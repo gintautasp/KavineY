@@ -10,12 +10,33 @@ public class UzsakymaiSpring {
 	public int[] seka_patiekalu;
 	public Skaitymas skait;
 	
+	public Patiekalas[] atiduokPatiekalus() {
+		
+		return patiekalai;
+	}
+	
+	public int kiekPatiekalu() {
+		
+		return kiek_patiekalu;
+	}
+	
+	public void papildytiPatiekalus( Patiekalas patiekalas ) {
+		
+		patiekalai [ kiek_patiekalu ] = patiekalas;
+		kiek_patiekalu++;
+	}
 	
 	public UzsakymaiSpring() {
 		
 		this.patiekalai = new Patiekalas[100];
 		this.seka_patiekalu = new int [100];
 	}
+	
+	public UzsakymaiSpring( int kiek_patiekalu ) {
+		
+		this.patiekalai = new Patiekalas[ kiek_patiekalu ];
+		this.seka_patiekalu = new int [ kiek_patiekalu ];
+	}	
 	
 	public UzsakymaiSpring ( SkaitymasIsFailo s ) {
 		

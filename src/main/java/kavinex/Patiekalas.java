@@ -26,6 +26,11 @@ public class Patiekalas {
 		bus_patiektas_apytiksliai_uz += ruosimo_pradzia; 
 	}
 	
+	public void setTrukmeRuosimo( int trukme_ruosimo ) {
+		
+		bus_paruostas_uz = trukme_ruosimo;
+	}
+	
 	public int trukmeRuosimo() {
 		
 		return bus_paruostas_uz;
@@ -55,7 +60,10 @@ public class Patiekalas {
         		this.pavadinimas.equalsIgnoreCase(palyginimui.pavadinimas)
               &&  
               	papildomiPalyginimai ( obj )
-              	
+              &&	
+              	this.trukmeRuosimo() == palyginimui.trukmeRuosimo() 
+              		// pridedame papildomą tikrinimą patiekalų paruošimo metodui ..
+              		// .. tikėdamiesi, kad nepakenks ankstesniems testams
         		){
         	
             status = true;
@@ -65,7 +73,7 @@ public class Patiekalas {
 	
 	public String toString() {
 		
-		return this.pavadinimas + ";";
+		return this.pavadinimas + " - " + bus_paruostas_uz + " - " +  ";";
 	}
 	
 	public boolean papildomiPalyginimai ( Object obj ) {
