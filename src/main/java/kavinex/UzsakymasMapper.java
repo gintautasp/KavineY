@@ -13,6 +13,7 @@ public class UzsakymasMapper implements RowMapper<Uzsakymas> {
       uzsakymas.setPav(rs.getString("pav"));
       uzsakymas.setTrukme_ruosimo(rs.getInt("trukme_ruosimo"));
       uzsakymas.setTrukme_kaitinimo(rs.getInt("trukme_kaitinimo"));
+      uzsakymas.setBusena( rs.getString("busena") );
       
       return uzsakymas;
    }

@@ -6,17 +6,19 @@ public class Uzsakymas {
 	private String pav;
 	private int trukme_ruosimo;
 	private int trukme_kaitinimo;
+	private String busena;
 	
 	public Uzsakymas() {
 		
 	}
 	
-	public Uzsakymas (String pav, int trukme_ruosimo, int trukme_kaitinimo) {
+	public Uzsakymas (String pav, int trukme_ruosimo, int trukme_kaitinimo, String busena) {
 		
 		this.id = 0;
 		this.pav = pav;
 		this.trukme_kaitinimo = trukme_kaitinimo;
 		this.trukme_ruosimo = trukme_ruosimo;
+		this.busena = busena;
 	}
 	
 	public String toString() {
@@ -26,6 +28,7 @@ public class Uzsakymas {
 				+ "/" + this.pav 
 				+ "/" + this.trukme_ruosimo
 				+ "/" + this.trukme_kaitinimo
+				+ "/" + this.busena
 			;
 	}
 	public boolean isCorrect() {
@@ -49,9 +52,20 @@ public class Uzsakymas {
         boolean status = false;
         
         if(
-        		this.pav.equalsIgnoreCase(palyginimui.pav)
-                && this.trukme_ruosimo == palyginimui.trukme_ruosimo 
-                && this.trukme_kaitinimo == palyginimui.trukme_kaitinimo ){
+        			this.pav.equalsIgnoreCase(palyginimui.pav)
+              &&  
+                 (
+                	this.trukme_ruosimo == palyginimui.trukme_ruosimo
+                 )
+              &&
+              	 (	
+              		this.trukme_kaitinimo == palyginimui.trukme_kaitinimo
+              	 )
+              && 
+              	 ( 
+              		this.busena == palyginimui.busena
+                 )
+        ){
             status = true;
         }
         return status;
@@ -95,4 +109,14 @@ public class Uzsakymas {
 		
 		return this.trukme_kaitinimo;
 	}
+	
+	public void setBusena( String busena ) {
+		
+		this.busena = busena;
+	}
+	
+	public String getBusena () {
+		
+		return this.busena;
+	}	
 }

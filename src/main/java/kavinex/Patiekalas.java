@@ -8,16 +8,20 @@ public class Patiekalas {
 	public int bus_patiektas_apytiksliai_uz; /* minutemis */
 	public int patiekimo_laikas = 0;
 	public PatiekaluPateikimoBusenos bukle = PatiekaluPateikimoBusenos.Paruoštas;
+	public String busena = "uzsakytas";
+	public int id_uzsakymo;
 	
 	public Patiekalas() {
 		
 	}
 	
-	public Patiekalas( String pavadinimas ) {
+	public Patiekalas( String pavadinimas, String busena, int id_uzsakymo ) {
 		
 		this.pavadinimas = pavadinimas;
 		bus_paruostas_uz = 0;
 		bus_patiektas_apytiksliai_uz = 0;
+		this.busena = busena;
+		this.id_uzsakymo = id_uzsakymo;
 	}
 	
 	public void busPradetasRuostiUz (int ruosimo_pradzia) {
@@ -84,6 +88,11 @@ public class Patiekalas {
 	public void rodyk() {
 		
 		System.out.println ( "\t" + pavadinimas + " -> " + bus_paruostas_uz + " / " + bus_patiektas_apytiksliai_uz + " min." );
+	}
+	
+	public String getBusena () {
+		
+		return this.busena;
 	}
 }
 

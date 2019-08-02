@@ -32,6 +32,11 @@ public class UzsakymaiSpring {
 		this.seka_patiekalu = new int [100];
 	}
 	
+	/**
+	 * kostruktorius skirtas testavimui
+	 * @param kiek_patiekalu
+	 */
+	
 	public UzsakymaiSpring( int kiek_patiekalu ) {
 		
 		this.patiekalai = new Patiekalas[ kiek_patiekalu ];
@@ -84,7 +89,7 @@ public class UzsakymaiSpring {
 						was_read.getTrukme_kaitinimo() == 0
 				) {
 				
-				patiekalas = new Patiekalas ( was_read.getPav() );
+				patiekalas = new Patiekalas ( was_read.getPav(), was_read.getBusena(), was_read.getId() );
 				
 			} else {
 				
@@ -93,6 +98,8 @@ public class UzsakymaiSpring {
 					patiekalas = new RuosiamasPatiekalas (
 							
 							was_read.getPav()
+							, was_read.getBusena()
+							, was_read.getId()
 							, was_read.getTrukme_ruosimo() 
 					);
 					
@@ -101,6 +108,8 @@ public class UzsakymaiSpring {
 					patiekalas = new KarstasPatiekalas (
 							
 						was_read.getPav()
+						, was_read.getBusena()
+						, was_read.getId()
 						, was_read.getTrukme_ruosimo()
 						, was_read.getTrukme_kaitinimo() 
 					);						
@@ -121,7 +130,7 @@ public class UzsakymaiSpring {
 		
 		for (int i = 0; i < kiek_patiekalu; i++) {
 			
-			if ( patiekalai [ i ].trukmeRuosimo() > 0 ) {
+			if ( ( patiekalai [ i ].trukmeRuosimo() > 0 ) && ( patiekalai [ i ].getBusena() == "uzsakytas" ) ) {
 				
 				patiekalai [ i ].busPradetasRuostiUz( virejas_uztruks ); // 	      prisumuojam prie ruošimo laiko
 				
@@ -146,6 +155,17 @@ public class UzsakymaiSpring {
 		int padavejos_laikas = 0;
 		boolean uzsakymai_ivykdyti = false;
 		int k = 0;
+		
+		for (int i = 0; i < kiek_patiekalu; i++) {	
+			
+			if ( ! patiekalai [ i ].getBusena().equals ( "uzsakytas" ) ) {
+				
+				seka_patiekalu [ k ] = i;
+				patiekalai [ i ].patiekti ( 0 );
+				k++;
+				
+			}
+		}
 	
 		while ( ! uzsakymai_ivykdyti ) {							// kol yra neįvykdytų užsakymų
 			
@@ -154,25 +174,28 @@ public class UzsakymaiSpring {
 			
 			for (int i = 0; i < kiek_patiekalu; i++) {				// peržiūrime patiekalų sąrašą:
 				
-				if ( patiekalai [ i ].bukle != PatiekaluPateikimoBusenos.Patiektas) { // radom nepatiektą patiekalą >>> a1
+				if ( patiekalai [ i ].getBusena().equals( "uzsakytas" ) ) {
 				
-					if ( 
-								( patiekalai [ i ].trukmePateikimo() <= padavejos_laikas ) // ar jau paruoštas
-							&& 
-								! padaveja_pateike 											// ir padavėja nieko naptiekė
-					) {
-						/*
-						 * patiekalo pateikimas
-						 */
-						patiekalai [ i ].bukle = PatiekaluPateikimoBusenos.Patiektas;
-						padavejos_laikas += 2;
-						padaveja_pateike = true; 							// šitos peržiūros metu paitekė patiekalą
-						patiekalai [ i ].patiekti ( padavejos_laikas );
-						seka_patiekalu [ k ] = i;
-						k++;
+					if ( patiekalai [ i ].bukle != PatiekaluPateikimoBusenos.Patiektas) { // radom nepatiektą patiekalą >>> a1
+					
+						if ( 
+									( patiekalai [ i ].trukmePateikimo() <= padavejos_laikas ) // ar jau paruoštas
+								&& 
+									! padaveja_pateike 											// ir padavėja nieko naptiekė
+						) {
+							/*
+							 * patiekalo pateikimas
+							 */
+							patiekalai [ i ].bukle = PatiekaluPateikimoBusenos.Patiektas;
+							padavejos_laikas += 2;
+							padaveja_pateike = true; 							// šitos peržiūros metu paitekė patiekalą
+							patiekalai [ i ].patiekti ( padavejos_laikas );
+							seka_patiekalu [ k ] = i;
+							k++;
+						}
+						uzsakymai_ivykdyti = false;									// <<< a1 užsakymai dar buvo neįvykdyti
 					}
-					uzsakymai_ivykdyti = false;									// <<< a1 užsakymai dar buvo neįvykdyti
-				}
+			    }
 			}
 			if ( ! padaveja_pateike ) {	// jei nieko nepatiekė laikas didėja 1-a minute
 				

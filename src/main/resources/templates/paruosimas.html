@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Usakymai</title>
+    <title>ParuoÅ¡imas</title>
     <meta charset="utf-8">
 		<style>
 			.anuliuotas, .sanuliuotas {
@@ -64,27 +64,27 @@
 						
 						for ( i = 0; i < data.length; i++) {
 						
-							res_str += '<tr class="s' + data [ i ].busena  + '" data-id="' + data [ i ].id  +'" >'
+							res_str += '<tr class="s' + data [ i ].busena  + '" data-id="' + data [ i ].id_uzsakymo  +'" >'
 								// + '<td>' + data [ i ].id + '</td>' 
-								+ '<td>' + data [ i ].pavadinimas + '</td>'
+								+ '<td>' + data [ i ].pavadinimas + "/" + data [ i ].busena + '</td>'
 								+ '<td>' + data [ i ].bus_paruostas_uz + '</td>'
 								+ '<td>' + data [ i ].patiekimo_laikas + '</td>'
 								;
-												/*	
-												if ( data [ i ].busena == 'uzsakytas' ) {	
 												
-													res_str +=
-													
-														'<td><input type="button" class="anuliuotas" value="anuliuotas"></td>'
-														+ '<td><input type="button" class="ivykdytas" value="ivykdytas"></td>'
-												}
-												*/
+								if ( data [ i ].busena == 'uzsakytas' ) {	
+												
+									res_str +=
+									
+										'<td><input type="button" class="anuliuotas" value="anuliuotas"></td>'
+										+ '<td><input type="button" class="ivykdytas" value="ivykdytas"></td>'
+								}
+												
 							res_str += '</tr>';
 						}
 						
 						res_str += '</table>'
 						$( '#uzsakymai' ).html ( res_str );
-/*						
+						
 						$( '.anuliuotas' ).on ( 'click', function() {
 						
 							$( this ).each ( function() {
@@ -103,8 +103,7 @@
 
 								keistiBusena ( id_uzsakymo, 'ivykdytas' );
 							});
-						});
-*/						
+						});						
 					}
 			);		
 		}

@@ -11,9 +11,9 @@ public class RuosiamasPatiekalas extends Patiekalas {
 		
 	}
 	
-	public RuosiamasPatiekalas (String pavadinimas, int trukme_ruosimo ) {
+	public RuosiamasPatiekalas (String pavadinimas, String n_busena, int id_uzsakymo, int trukme_ruosimo ) {
 		
-		super ( pavadinimas );
+		super ( pavadinimas, n_busena, id_uzsakymo );
 		this.trukme_ruosimo = trukme_ruosimo;
 		bus_paruostas_uz += trukme_ruosimo;
 		bus_patiektas_apytiksliai_uz += trukme_ruosimo;

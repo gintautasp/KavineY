@@ -76,7 +76,7 @@ public class UzsakymasJDBCTemplate implements UzsakymasDAO, Skaitymas  {
 	   */
 	   public List<Uzsakymas> listUzsakymai() {
 
-	    	String SQL = "select * from uzsakymai order by id desc";
+	    	String SQL = "select * from uzsakymai order by id";
 	    	List <Uzsakymas> uzsakymai = jdbcTemplateObject.query(
 	    			SQL
 	    			, new UzsakymasMapper()
