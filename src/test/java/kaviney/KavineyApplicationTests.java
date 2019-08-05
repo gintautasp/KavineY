@@ -38,20 +38,20 @@ public class KavineyApplicationTests {
 		
 		kavinex.Uzsakymas[] uzsakymai = {
 				
-			new kavinex.Uzsakymas ( "Ledai", 0, 0 )								// 0
-			, new kavinex.Uzsakymas ( "Kava Juoda", 0, 0 ) 						// 1
-			, new kavinex.Uzsakymas ( "Tortilija su falafeliais", 20, 5 ) 		// 2
-			, new kavinex.Uzsakymas ( "Cezario salotos", 15, 0 )				// 3
-			, new kavinex.Uzsakymas ( "Obuoliu pyragas su braskemis", 15, 0 )	// 4			
-			, new kavinex.Uzsakymas ( "Kava Late", -1, -1 )						// 5
-			, new kavinex.Uzsakymas ( "Humus Pica", -1, -1 )					// 6
-			, new kavinex.Uzsakymas ( "Trijų sūrių Pica", 15, -1 )				// 7
-			, new kavinex.Uzsakymas ( "Saltibarsciai su bulvemis", -1, 5 )		// 8
-			, new kavinex.Uzsakymas ( "Saltibarsciai", -1, -1 )					// 9
+			new kavinex.Uzsakymas ( "Ledai", 0, 0, "uzsakytas" )								// 0
+			, new kavinex.Uzsakymas ( "Kava Juoda", 0, 0, "uzsakytas" ) 						// 1
+			, new kavinex.Uzsakymas ( "Tortilija su falafeliais", 20, 5, "uzsakytas" ) 		// 2
+			, new kavinex.Uzsakymas ( "Cezario salotos", 15, 0, "uzsakytas" )				// 3
+			, new kavinex.Uzsakymas ( "Obuoliu pyragas su braskemis", 15, 0, "uzsakytas" )	// 4			
+			, new kavinex.Uzsakymas ( "Kava Late", -1, -1, "uzsakytas" )						// 5
+			, new kavinex.Uzsakymas ( "Humus Pica", -1, -1, "uzsakytas" )					// 6
+			, new kavinex.Uzsakymas ( "Trijų sūrių Pica", 15, -1, "uzsakytas" )				// 7
+			, new kavinex.Uzsakymas ( "Saltibarsciai su bulvemis", -1, 5, "uzsakytas" )		// 8
+			, new kavinex.Uzsakymas ( "Saltibarsciai", -1, -1, "uzsakytas" )					// 9
 			, null																// 10
 			, null																// 11
-			, new kavinex.Uzsakymas ( "1", 0, 0 )								// 12
-			, new kavinex.Uzsakymas ( "Saltibarsciai su bulvemis", -1, 5 )	    // 13				
+			, new kavinex.Uzsakymas ( "1", 0, 0, "uzsakytas" )								// 12
+			, new kavinex.Uzsakymas ( "Saltibarsciai su bulvemis", -1, 5, "uzsakytas" )	    // 13				
 		};
 
 		String[] tikrinimai = {
@@ -90,12 +90,12 @@ public class KavineyApplicationTests {
 		
 		Uzsakymas[] uzsakymai = {
 				
-			new Uzsakymas ( "Ledai", 0, 0 )								// 0
-			, new Uzsakymas ( "Tortilija su falafeliais", 20, 5 ) 		// 1
-			, new Uzsakymas ( "Cezario salotos", 15, 0 )				// 2			
-			, new Uzsakymas ( "Kava Late", -1, -1 )						// 3
-			, new Uzsakymas ( "Trijų sūrių Pica", 0, 10)				// 4
-			, new Uzsakymas ( "Saltibarsciai su bulvemis", -1, 5 )		// 5
+			new Uzsakymas ( "Ledai", 0, 0, "uzsakytas", 1 )							// 0
+			, new Uzsakymas ( "Tortilija su falafeliais", 20, 5, "uzsakytas", 2 ) 		// 1
+			, new Uzsakymas ( "Cezario salotos", 15, 0, "uzsakytas", 3 )				// 2			
+			, new Uzsakymas ( "Kava Late", -1, -1, "uzsakytas", 4 )						// 3
+			, new Uzsakymas ( "Trijų sūrių Pica", 0, 10, "uzsakytas", 5)				// 4
+			, new Uzsakymas ( "Saltibarsciai su bulvemis", -1, 5, "uzsakytas", 6 )		// 5
 		};
 
 		String[] tikrinimai = {
@@ -110,11 +110,11 @@ public class KavineyApplicationTests {
 		
 		Patiekalas[] patiekalai = {
 				
-			new Patiekalas ( "Ledai" )								// 0
-			, new KarstasPatiekalas ( "Tortilija su falafeliais", 20, 5 ) 	// 1
-			, new RuosiamasPatiekalas ( "Cezario salotos", 15 )		// 2			
+			new Patiekalas ( "Ledai", "uzsakytas", 1 )								// 0
+			, new KarstasPatiekalas ( "Tortilija su falafeliais", "uzsakytas", 2, 20, 5 ) 	// 1
+			, new RuosiamasPatiekalas ( "Cezario salotos", "uzsakytas", 3, 15 )		// 2			
 			, null													// 3
-			, new KarstasPatiekalas ( "Trijų sūrių Pica", 0, 10 )	// 4
+			, new KarstasPatiekalas ( "Trijų sūrių Pica", "uzsakytas", 3, 0, 10 )	// 4
 			, null												    // 5
 		};		
 		
@@ -162,21 +162,21 @@ public class KavineyApplicationTests {
 		
 		Patiekalas[] etalonas = {
 				
-				 new Patiekalas ( "Ledai" )
-				 , new Patiekalas ( "Kava Juoda" )
-				 , new KarstasPatiekalas ( "Tortilija su falafeliais", 20, 5 )		
-				 , new RuosiamasPatiekalas ( "Cezario Salotos", 15 )
+				 new Patiekalas ( "Ledai", "uzsakytas", 1 )
+				 , new Patiekalas ( "Kava Juoda", "uzsakytas", 2 )
+				 , new KarstasPatiekalas ( "Tortilija su falafeliais", "uzsakytas", 3, 20, 5 )		
+				 , new RuosiamasPatiekalas ( "Cezario Salotos", "uzsakytas", 4, 15 )
 				 
-				 , new KarstasPatiekalas ( "Kremine pievagrybiu sriuba", 10, 5 )
-				 , new Patiekalas ( "Obuoliu pyragas su braskemis" )
-				 , new Patiekalas ( "Kava Late" )
+				 , new KarstasPatiekalas ( "Kremine pievagrybiu sriuba", "uzsakytas", 5, 10, 5 )
+				 , new Patiekalas ( "Obuoliu pyragas su braskemis", "uzsakytas", 6 )
+				 , new Patiekalas ( "Kava Late", "uzsakytas", 7 )
 				 
-				 , new KarstasPatiekalas ( "Humus Pica", 15, 8 )
-				 , new KarstasPatiekalas ( "Saltibarsciai su bulvemis", 15, 5 )						
-				 , new KarstasPatiekalas ( "Bulviniai blynai", 10, 15 )
+				 , new KarstasPatiekalas ( "Humus Pica", "uzsakytas", 8, 15, 8 )
+				 , new KarstasPatiekalas ( "Saltibarsciai su bulvemis", "uzsakytas", 9, 15, 5 )						
+				 , new KarstasPatiekalas ( "Bulviniai blynai", "uzsakytas", 10, 10, 15 )
 				 
-				 , new Patiekalas ( "Vaisine arbata" )
-				 , new KarstasPatiekalas ( "Blyneliai su bananais", 15, 10 )
+				 , new Patiekalas ( "Vaisine arbata", "uzsakytas", 11 )
+				 , new KarstasPatiekalas ( "Blyneliai su bananais", "uzsakytas", 12, 15, 10 )
 		};
 
 		
@@ -196,20 +196,20 @@ public class KavineyApplicationTests {
 		}		
 		
 		UzsakymaiSpring uzsak = new UzsakymaiSpring( kiek_patiekalu );		
-		uzsak.papildytiPatiekalus( new Patiekalas ( "Ledai" ) );		
-		uzsak.papildytiPatiekalus( new Patiekalas ( "Kava Juoda" ) );
-		uzsak.papildytiPatiekalus( new KarstasPatiekalas ( "Tortilija su falafeliais", 20, 5 ) );		
-		uzsak.papildytiPatiekalus( new RuosiamasPatiekalas ( "Cezario Salotos", 15 ) );
-		uzsak.papildytiPatiekalus( new KarstasPatiekalas ( "Kremine pievagrybiu sriuba", 10, 5 ) );
+		uzsak.papildytiPatiekalus( new Patiekalas ( "Ledai", "uzsakytas", 1 ) );		
+		uzsak.papildytiPatiekalus( new Patiekalas ( "Kava Juoda", "uzsakytas", 2 ) );
+		uzsak.papildytiPatiekalus( new KarstasPatiekalas ( "Tortilija su falafeliais", "uzsakytas", 3, 20, 5 ) );		
+		uzsak.papildytiPatiekalus( new RuosiamasPatiekalas ( "Cezario Salotos", "uzsakytas", 4, 15 ) );
+		uzsak.papildytiPatiekalus( new KarstasPatiekalas ( "Kremine pievagrybiu sriuba", "uzsakytas", 5, 10, 5 ) );
 		
-		uzsak.papildytiPatiekalus( new Patiekalas ( "Obuoliu pyragas su braskemis" ) );
-		uzsak.papildytiPatiekalus( new Patiekalas ( "Kava Late" ) );		
-		uzsak.papildytiPatiekalus( new KarstasPatiekalas ( "Humus Pica", 15, 8 ) );
-		uzsak.papildytiPatiekalus( new KarstasPatiekalas ( "Saltibarsciai su bulvemis", 15, 5 ) );	
+		uzsak.papildytiPatiekalus( new Patiekalas ( "Obuoliu pyragas su braskemis", "uzsakytas", 6 ) );
+		uzsak.papildytiPatiekalus( new Patiekalas ( "Kava Late", "uzsakytas", 7 ) );		
+		uzsak.papildytiPatiekalus( new KarstasPatiekalas ( "Humus Pica", "uzsakytas", 8, 15, 8 ) );
+		uzsak.papildytiPatiekalus( new KarstasPatiekalas ( "Saltibarsciai su bulvemis", "uzsakytas", 9, 15, 5 ) );	
 		
-		uzsak.papildytiPatiekalus( new KarstasPatiekalas ( "Bulviniai blynai", 10, 15 ) );		
-		uzsak.papildytiPatiekalus( new Patiekalas ( "Vaisine arbata" ) );
-		uzsak.papildytiPatiekalus( new KarstasPatiekalas ( "Blyneliai su bananais", 15, 10 ) );		
+		uzsak.papildytiPatiekalus( new KarstasPatiekalas ( "Bulviniai blynai", "uzsakytas", 10, 10, 15 ) );		
+		uzsak.papildytiPatiekalus( new Patiekalas ( "Vaisine arbata", "uzsakytas", 11 ) );
+		uzsak.papildytiPatiekalus( new KarstasPatiekalas ( "Blyneliai su bananais", "uzsakytas", 12, 15, 10 ) );		
 		uzsak.ruostiPatiekalus();
 		
 		assertArrayEquals ( etalonas, uzsak.atiduokPatiekalus() );

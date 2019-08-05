@@ -2,11 +2,11 @@ package kavinex;
 
 public class Uzsakymas {
 	
-	private int id;
+	private int id = 0;
 	private String pav;
 	private int trukme_ruosimo;
 	private int trukme_kaitinimo;
-	private String busena;
+	private String busena = "uzsakytas";
 	
 	public Uzsakymas() {
 		
@@ -20,6 +20,15 @@ public class Uzsakymas {
 		this.trukme_ruosimo = trukme_ruosimo;
 		this.busena = busena;
 	}
+	
+	public Uzsakymas (String pav, int trukme_ruosimo, int trukme_kaitinimo, String busena, int id) {
+		
+		this.id = id;
+		this.pav = pav;
+		this.trukme_kaitinimo = trukme_kaitinimo;
+		this.trukme_ruosimo = trukme_ruosimo;
+		this.busena = busena;
+	}	
 	
 	public String toString() {
 		

@@ -20,6 +20,76 @@
 		$(document).ready ( function() {
 					
 		pasiimtiUzsakymus();
+		pasiimtiPatiekalus();
+		
+		var patieklai;
+		
+		function pasiimtiPatiekalus() {
+		
+			$.ajax(
+				{
+					url: "http://localhost:8080/restfull/lst-patiekalai" 
+															/*
+															, beforeSend: function( xhr ) {
+																xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
+															}
+															*/
+				}
+			)
+			.done(
+					function( data ) {
+					
+						patiekalai = data;
+															// alert ( 'jquery ok ' + data );
+						res_str = '<select id="patiekalu_sel">'
+								+ '<option value="0">nepasirinkta</option>' 
+						
+						for ( i = 0; i < data.length; i++) {
+						
+							res_str += '<option value="' + data [ i ].id  +'" >'
+
+								+  data [ i ].pav 
+								;
+												
+												
+							res_str += '</option>';
+						}
+						
+						res_str += '</select>';
+						
+						$( '#patiekalu_parinkimas' ).html ( res_str );
+						
+						$( '#patiekalu_sel' ).on ( 'change', function() {
+						
+							id = parseInt ( $( this ).val() );
+							
+							i = surastiPatiekalaPagalId ( id );
+
+							alert ( id + ' -> ' + i );
+							
+							$( '#pav' ).val( patiekalai [ i ].pav );
+							$( '#trukme_ruosimo' ).val( patiekalai [ i ].trukme_ruosimo );
+							$( '#trukme_kaitinimo' ).val( patiekalai [ i ].trukme_kaitinimo  );
+							$( '#kaina' ).val( patiekalai [ i ].kaina );	
+							$( '#id_patiekalo' ).val( patiekalai [ i ].id );
+						});
+					}
+			);		
+		}
+
+		function surastiPatiekalaPagalId ( id ) {
+		
+			found = -1;
+	
+			for ( i = 0; i < patiekalai.length; i++) {	
+			
+				if ( id == patiekalai [ i ].id ) {
+				
+					found = i;
+				}
+			}
+			return found;
+		}
 		
 		function keistiBusena( id, busena) {
 		
@@ -117,6 +187,9 @@
 				pav: $( '#pav' ).val()
 				, trukme_ruosimo: parseInt ( $( '#trukme_ruosimo' ).val() )
 				, trukme_kaitinimo: parseInt ( $( '#trukme_kaitinimo' ).val() )
+				, klientas: $( '#klientas' ).val()
+				, kaina: parseFloat ( $( '#kaina' ).val() )
+				, id_patiekalo: parseInt ( $( '#id_patiekalo' ).val() )
 			}
 			
 			// alert ( 'uzsakymas  ' + uzsakymas.pav + ' ' );
@@ -125,6 +198,9 @@
 				"pav="  + uzsakymas.pav 
 				+ '&trukme_ruosimo=' + uzsakymas.trukme_ruosimo 
 				+ '&trukme_kaitinimo=' + uzsakymas.trukme_kaitinimo 
+				+ '&klientas=' + uzsakymas.klientas
+				+ '&kaina=' + uzsakymas.kaina 
+				+ '&id_patiekalo=' + uzsakymas.id_patiekalo 				
 				
 			alert ( "http://localhost:8080/restfull/add?" + params_str );
 				
@@ -144,12 +220,20 @@
 </head>
 <body>
 	<form action="">
+		<div id="patiekalu_parinkimas">
+		</div>
+		<br>
 		Patiekalo pavadinimas<br>
 		<input type="text" id="pav" value=""><br><br>
 		Trukme ruošimo<br>
 		<input type="text" id="trukme_ruosimo" value=""><br><br>
 		Trukme kaitinimo<br>
 		<input type="text" id="trukme_kaitinimo" value=""><br><br>
+		Klientas<br>
+		<input type="text" id="klientas" value=""><br><br>
+		Kaina<br>
+		<input type="text" id="kaina" value=""><br><br>		
+		<input type="hidden" id="id_patiekalo" value="0">
 		<input type="button" id="naujas_uzsakymas" value="Uzsakyti">
 	</form>
 	<div id="uzsakymai">
