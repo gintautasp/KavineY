@@ -10,18 +10,35 @@ public class Patiekalas {
 	public PatiekaluPateikimoBusenos bukle = PatiekaluPateikimoBusenos.Paruoštas;
 	public String busena = "uzsakytas";
 	public int id_uzsakymo;
+	public String laikas_uzsakymo;
+	public String laikas_patekimo;
+	public Double kaina;
+	public String klientas;	
 	
 	public Patiekalas() {
 		
 	}
 	
-	public Patiekalas( String pavadinimas, String busena, int id_uzsakymo ) {
+	public Patiekalas(
+			
+			String pavadinimas
+			, String busena
+			, int id_uzsakymo
+			, String laikas_uzsakymo
+			, String laikas_patekimo
+			, Double kaina
+			, String klientas			
+		) {
 		
 		this.pavadinimas = pavadinimas;
 		bus_paruostas_uz = 0;
 		bus_patiektas_apytiksliai_uz = 0;
 		this.busena = busena;
 		this.id_uzsakymo = id_uzsakymo;
+		this.laikas_uzsakymo = laikas_uzsakymo;
+		this.laikas_patekimo = laikas_patekimo;
+		this.kaina = kaina;
+		this.klientas = klientas; 		
 	}
 	
 	public void busPradetasRuostiUz (int ruosimo_pradzia) {

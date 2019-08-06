@@ -14,6 +14,10 @@ public class UzsakymasMapper implements RowMapper<Uzsakymas> {
       uzsakymas.setTrukme_ruosimo(rs.getInt("trukme_ruosimo"));
       uzsakymas.setTrukme_kaitinimo(rs.getInt("trukme_kaitinimo"));
       uzsakymas.setBusena( rs.getString("busena") );
+      uzsakymas.setKaina(rs.getDouble("kaina"));
+      uzsakymas.setKlientas(rs.getString("klientas"));
+      uzsakymas.setLaikas_uzsakymo( rs.getString ( "laikas_uzsakymo" ) );
+      uzsakymas.setLaikas_patekimo( rs.getString ( "laikas_patekimo" ) );
       
       return uzsakymas;
    }

@@ -126,9 +126,16 @@
 						res_str = '<table>'
 								+ '<tr>' 
 													// + '<th rowspan="2">id</th>'
-								+ '<th>pavadinimas</th>'													
-								+ '<th>bus <br>paruoštas<br> už</th>'
-								+' <th>patiekimo<br>laikas</th></tr>';
+								+  '<th>pavadinimas</th>'													
+								+  '<th>bus <br>paruoštas<br> už</th>'
+								+ ' <th>numat.<br>patiek.<br>laikas</th>'
+								+ ' <th>užsakytas</th>'
+								+ '<th>patiektas</th>'
+								+ '<th>kaina</th>'
+								+ '<th>klientas</th>'
+								+ '</tr>'
+							;
+								
 												// + '<tr><th>ruošimo</th><th>kaitinimo</th><th>veiksmas</th></tr>';
 														// bus_paruostas_uz":35,"":47
 						
@@ -139,6 +146,10 @@
 								+ '<td>' + data [ i ].pavadinimas + "/" + data [ i ].busena + '</td>'
 								+ '<td>' + data [ i ].bus_paruostas_uz + '</td>'
 								+ '<td>' + data [ i ].patiekimo_laikas + '</td>'
+								+ '<td>' + data [ i ].laikas_uzsakymo  + '</td>'
+								+ '<td>' + data [ i ].laikas_patekimo + '</td>'
+								+ '<td>' + data [ i ].kaina + '</td>'
+								+ '<td>' + data [ i ].klientas + '</td>'								
 								;
 												
 								if ( data [ i ].busena == 'uzsakytas' ) {	

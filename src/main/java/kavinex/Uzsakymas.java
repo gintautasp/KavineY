@@ -7,6 +7,10 @@ public class Uzsakymas {
 	private int trukme_ruosimo;
 	private int trukme_kaitinimo;
 	private String busena = "uzsakytas";
+	private String laikas_uzsakymo;
+	private String laikas_patekimo;
+	private Double kaina;
+	private String klientas; 	
 	
 	public Uzsakymas() {
 		
@@ -21,13 +25,26 @@ public class Uzsakymas {
 		this.busena = busena;
 	}
 	
-	public Uzsakymas (String pav, int trukme_ruosimo, int trukme_kaitinimo, String busena, int id) {
+	public Uzsakymas (
+			String pav
+			, int trukme_ruosimo
+			, int trukme_kaitinimo
+			, String busena, int id
+			, String laikas_uzsakymo
+			, String laikas_patekimo
+			, Double kaina
+			, String klientas			
+		) {
 		
 		this.id = id;
 		this.pav = pav;
 		this.trukme_kaitinimo = trukme_kaitinimo;
 		this.trukme_ruosimo = trukme_ruosimo;
 		this.busena = busena;
+		this.laikas_uzsakymo = laikas_uzsakymo;
+		this.laikas_patekimo = laikas_patekimo;
+		this.kaina = kaina;
+		this.klientas = klientas; 		
 	}	
 	
 	public String toString() {
@@ -127,5 +144,37 @@ public class Uzsakymas {
 	public String getBusena () {
 		
 		return this.busena;
+	}
+	
+	public String getLaikas_uzsakymo() {
+		return laikas_uzsakymo;
+	}
+
+	public void setLaikas_uzsakymo(String laikas_uzsakymo) {
+		this.laikas_uzsakymo = laikas_uzsakymo;
+	}	
+	
+	public String getLaikas_patekimo() {
+		return laikas_patekimo;
+	}
+
+	public void setLaikas_patekimo(String laikas_patekimo) {
+		this.laikas_patekimo = laikas_patekimo;
+	}	
+	
+	public String getKlientas() {
+		return klientas;
+	}
+
+	public void setKlientas(String klientas) {
+		this.klientas = klientas;
+	}	
+	
+	public Double getKaina() {
+		return kaina;
+	}
+
+	public void setKaina(Double kaina) {
+		this.kaina = kaina;
 	}	
 }

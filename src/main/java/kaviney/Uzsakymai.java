@@ -24,6 +24,9 @@ public class Uzsakymai {
     private Double kaina; 
     
     private Integer id_patiekalo;
+    
+	private String laikas_uzsakymo;
+	private String laikas_patekimo;  
 
 	public Integer getId() {
 		return id;
@@ -34,11 +37,11 @@ public class Uzsakymai {
 	}
 	
 	public Integer getId_patiekalo() {
-		return id;
+		return id_patiekalo;
 	}
 
-	public void setId_patiekalo(Integer id) {
-		this.id = id;
+	public void setId_patiekalo(Integer id_patiekalo) {
+		this.id_patiekalo = id_patiekalo;
 	}	
 
 	public String getPav() {
@@ -87,6 +90,41 @@ public class Uzsakymai {
 
 	public void setKaina(Double kaina) {
 		this.kaina = kaina;
+	}
+	
+	public String getLaikas_uzsakymo() {
+		return laikas_uzsakymo;
+	}
+
+	public void setLaikas_uzsakymo(String laikas_uzsakymo) {
+		this.laikas_uzsakymo = laikas_uzsakymo;
 	}	
+	
+	public String getLaikas_patekimo() {
+		return laikas_patekimo;
+	}
+
+	public void setLaikas_patekimo(String laikas_patekimo) {
+		this.laikas_patekimo = laikas_patekimo;
+	}	
+	
+	public String toString() {
+		
+	    return 
+	    		id 
+	    		+ " / " + pav
+
+				+ " / " + trukme_ruosimo	    		
+				
+				+ " / " + trukme_kaitinimo	    		
+				
+				+ " / " + busena	    		
+				
+				+ " / " + klientas	    		
+				
+				+ " / " +  kaina
+			; 		
+	}
+	
 }
 

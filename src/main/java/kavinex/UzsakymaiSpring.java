@@ -89,7 +89,15 @@ public class UzsakymaiSpring {
 						was_read.getTrukme_kaitinimo() == 0
 				) {
 				
-				patiekalas = new Patiekalas ( was_read.getPav(), was_read.getBusena(), was_read.getId() );
+				patiekalas = new Patiekalas ( 
+						was_read.getPav()
+						, was_read.getBusena()
+						, was_read.getId()
+						, was_read.getLaikas_uzsakymo()
+						, was_read.getLaikas_patekimo()
+						, was_read.getKaina()
+						, was_read.getKlientas()
+					);
 				
 			} else {
 				
@@ -101,6 +109,10 @@ public class UzsakymaiSpring {
 							, was_read.getBusena()
 							, was_read.getId()
 							, was_read.getTrukme_ruosimo() 
+							, was_read.getLaikas_uzsakymo()
+							, was_read.getLaikas_patekimo()
+							, was_read.getKaina()
+							, was_read.getKlientas()							
 					);
 					
 				} else {
@@ -112,6 +124,10 @@ public class UzsakymaiSpring {
 						, was_read.getId()
 						, was_read.getTrukme_ruosimo()
 						, was_read.getTrukme_kaitinimo() 
+						, was_read.getLaikas_uzsakymo()
+						, was_read.getLaikas_patekimo()
+						, was_read.getKaina()
+						, was_read.getKlientas()						
 					);						
 				}
 			}

@@ -11,9 +11,26 @@ public class RuosiamasPatiekalas extends Patiekalas {
 		
 	}
 	
-	public RuosiamasPatiekalas (String pavadinimas, String n_busena, int id_uzsakymo, int trukme_ruosimo ) {
+	public RuosiamasPatiekalas (
+			String pavadinimas
+			, String n_busena
+			, int id_uzsakymo
+			, int trukme_ruosimo 
+			, String laikas_uzsakymo
+			, String laikas_patekimo
+			, Double kaina
+			, String klientas			
+		) {
 		
-		super ( pavadinimas, n_busena, id_uzsakymo );
+		super ( 
+				pavadinimas
+				, n_busena
+				, id_uzsakymo
+				, laikas_uzsakymo
+				, laikas_patekimo
+				, kaina
+				, klientas				
+		);
 		this.trukme_ruosimo = trukme_ruosimo;
 		bus_paruostas_uz += trukme_ruosimo;
 		bus_patiektas_apytiksliai_uz += trukme_ruosimo;

@@ -47,6 +47,7 @@ public class MainController {
 		n.setId_patiekalo(id_patiekalo);
 		n.setKlientas(klientas);
 		n.setBusena( "uzsakytas" );
+		System.out.println (n.toString() );
 		uzsakymaiRepository.save(n);
 		return "Saved";
 	}

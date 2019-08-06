@@ -8,9 +8,28 @@ public class KarstasPatiekalas extends RuosiamasPatiekalas {
 		
 	}
 	
-	public KarstasPatiekalas (String pavadinimas, String n_busena, int id_uzsakymo, int trukme_ruosimo, int trukme_kaitinimo ) {
+	public KarstasPatiekalas (
+			String pavadinimas
+			, String n_busena
+			, int id_uzsakymo
+			, int trukme_ruosimo
+			, int trukme_kaitinimo
+			, String laikas_uzsakymo
+			, String laikas_patekimo
+			, Double kaina
+			, String klientas			
+		) {
 		
-		super ( pavadinimas, n_busena, id_uzsakymo, trukme_ruosimo );
+		super ( 
+				pavadinimas
+				, n_busena
+				, id_uzsakymo
+				, trukme_ruosimo
+				, laikas_uzsakymo
+				, laikas_patekimo
+				, kaina
+				, klientas				
+		);
 		this.trukme_kaitinimo = trukme_kaitinimo;
 		bus_patiektas_apytiksliai_uz += trukme_kaitinimo;
 	}

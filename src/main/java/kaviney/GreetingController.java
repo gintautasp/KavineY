@@ -24,7 +24,7 @@ public class GreetingController {
         return "paruosimas";
     }    
        
-    @GetMapping("/uzsakymaivfgt1iok72u6fch")
+    @GetMapping("/uzsakymaivoo1472u6fch")
     public String uzsakymaix(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
         model.addAttribute("name", name);
         return "paruosimas";
