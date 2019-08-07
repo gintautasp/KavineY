@@ -70,12 +70,21 @@ public class MainController {
 			
 			   Uzsakymai n = found.get();
 			   n.setId(id);
-			   n.setBusena(busena);	
+			   n.setBusena(busena);
+			   
+			   // pagal https://coderanch.com/t/304851/databases/Java-date-MySQL-date-conversion
+
+			   java.util.Date dt = new java.util.Date();
+			   java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			   String currentTime = sdf.format(dt);
+			   // \pagal
+			   n.setLaikas_patekimo(currentTime);			   
 			   uzsakymaiRepository.save(n);	
 			   res = "Saved";
 			}		
 		return res;
 	}	
+
 	
 	@GetMapping(path="/lst-patiekalai")
 	public @ResponseBody Iterable<Patiekalai> getAllPatiekalai() {
