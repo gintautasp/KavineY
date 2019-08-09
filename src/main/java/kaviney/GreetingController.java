@@ -16,12 +16,22 @@ public class GreetingController {
     public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
         model.addAttribute("name", name);
         return "uzsakymai";
-    }
+    }    
     
     @GetMapping("/paruosimas")
     public String paruosimas(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
         model.addAttribute("name", name);
         return "paruosimas";
+    }    
+    
+    @GetMapping("/info")
+    public String info() {
+    	return "info";
+    }
+    
+    @GetMapping("/inforaides001")
+    public String inforaides() {
+    	return "info";
     }    
        
     @GetMapping("/uzsakymaivoo1472u6fch")

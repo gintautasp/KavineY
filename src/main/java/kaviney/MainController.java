@@ -10,11 +10,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 import kaviney.Uzsakymai;
 import kaviney.UzsakymaiRepository;
 
 import kaviney.Patiekalai;
 import kaviney.PatiekalaiRepository;
+
+import kaviney.TopPatiekalai;
+import kaviney.TopPatiekalaiAtaskaita;
 
 import kavinex.*;
 
@@ -83,9 +90,8 @@ public class MainController {
 			   res = "Saved";
 			}		
 		return res;
-	}	
-
-	
+	}
+		
 	@GetMapping(path="/lst-patiekalai")
 	public @ResponseBody Iterable<Patiekalai> getAllPatiekalai() {
 		// This returns a JSON or XML with the users
@@ -110,5 +116,24 @@ public class MainController {
 		;		
 		
 		return uzsakymai.isnesiotix();
+	}
+	
+	@GetMapping(path="/top-patiekalai")
+	public @ResponseBody Iterable<TopPatiekalai> getTopPatiekalai(
+			@RequestParam String laikotarpis_nuo
+			, @RequestParam String laikotarpis_iki
+	) {
+		
+//		 Map<String, String> properties = new HashMap<String, String>();
+//		  properties.put("javax.persistence.jdbc.user", "root");
+//		  properties.put("javax.persistence.jdbc.password", "");
+		  EntityManagerFactory emf = Persistence.createEntityManagerFactory("TopPatiekalaiAtaskaita");   // Persistence.createEntityManagerFactory( "jdbc:mysql://localhost:3306/spring_jpa/kavine;user=root;password=");		
+		
+		// EntityManagerFactory emfactory = Persistence.createEntityManagerFactory( "Eclipselink_JPA" );
+		EntityManager entitymanager = emf.createEntityManager();
+		
+		TopPatiekalaiAtaskaita tp = new TopPatiekalaiAtaskaita( entitymanager );
+
+		return tp.topPatiekalai(laikotarpis_nuo, laikotarpis_iki);
 	}	
 }

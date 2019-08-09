@@ -30,6 +30,12 @@
       class = "kavinex.UzsakymasJDBCTemplate">
       <property name = "dataSource" ref = "dataSource" />    
    </bean>   
-   
+   <beans>
+
+   <bean id="myEmf" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
+      <property name="persistenceUnitName" value="TopPatiekalaiAtaskaita"/>
+   </bean>
+
+</beans>
    
 </beans>

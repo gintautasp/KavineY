@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>top info</title>
+		<script
+			src="https://code.jquery.com/jquery-3.4.1.min.js"
+			integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+			crossorigin="anonymous">
+		</script>		
+		<script>
+			$(document).ready ( function() {		
+		
+				pasiimtiTopPatiekalus();
+		
+				function topPatiekalaiILentele ( data, divas ) {		
+														// alert ( 'jquery ok ' + data );
+					res_str = '<table>'
+							+ '<tr>' 
+														// + '<th rowspan="2">id</th>'
+							+  '<th>id</th>'													
+							+  '<th>pateikalas</th>'
+							+ ' <th>ruošti</th>'
+							+ ' <th>kaitinti</th>'
+							+ '<th>kaina</th>'
+							+ '<th>užsakymų</th>'
+							+ '<th>už sumą</th>'
+							+ '</tr>'
+						;
+							
+											// + '<tr><th>ruošimo</th><th>kaitinimo</th><th>veiksmas</th></tr>';
+													// bus_paruostas_uz":35,"":47
+					
+					for ( i = 0; i < data.length; i++) {
+					
+						res_str += '<tr>'
+							 + '<td>' + data [ i ].pat_id + '</td>' 
+							+ '<td>' + data [ i ].patiekalas +'</td>'
+							+ '<td>' + data [ i ].ruosti + '</td>'
+							+ '<td>' + data [ i ].kaitinti + '</td>'
+							+ '<td>' + data [ i ].kaina  + '</td>'
+							+ '<td>' + data [ i ].uzsakymu + '</td>'
+							+ '<td>' + data [ i ].uz_suma + '</td>'
+							+ '</tr>';
+						;
+					}
+					
+					res_str += '</table>'
+					$( '#' + divas ).html ( res_str );
+				}
+			
+				function pasiimtiTopPatiekalus( ) {
+				
+					var today = new Date();
+					var dd = String(today.getDate()).padStart(2, '0');
+					var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+					var yyyy = today.getFullYear();
+
+					today = yyyy + '-' + mm + '-' + dd;
+					first_month_day = yyyy + '-' + mm + '-01';
+				
+					$.ajax(
+						{
+							url: "http://localhost:8080/restfull/top-patiekalai?laikotarpis_nuo=" + today + '&laikotarpis_iki=' + today 
+						}
+					)
+					.done(
+					
+						function( data ) {
+						
+							topPatiekalaiILentele ( data, "top_dienos" )
+						}
+					);
+					
+					$.ajax(
+						{
+							url: "http://localhost:8080/restfull/top-patiekalai?laikotarpis_nuo=" + first_month_day + '&laikotarpis_iki=' + today 
+						}
+					)
+					.done(
+					
+						function( data ) {
+						
+							topPatiekalaiILentele ( data, "top_menesio" );
+						}
+					);				
+				}
+			});
+		</script>
+	</head>
+	<body>
+		<h3>Dienos top patiekalai</h3>
+		<div id="top_dienos">
+		</div>
+		<h3>Menesio top patiekalai</h3>
+		<div id="top_menesio">
+		</div>		
+	</body>
+</html>
