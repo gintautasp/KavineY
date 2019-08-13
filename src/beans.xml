@@ -32,9 +32,9 @@
    </bean>   
    <beans>
 
-   <bean id="myEmf" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
-      <property name="persistenceUnitName" value="TopPatiekalaiAtaskaita"/>
-   </bean>
+   <!-- bean id="myEmf" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
+      <property name="persistenceUnitName" value="kaviney.TopPatiekalaiAtaskaita"/>
+   </bean -->
 
 </beans>
    

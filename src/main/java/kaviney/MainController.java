@@ -127,9 +127,9 @@ public class MainController {
 //		 Map<String, String> properties = new HashMap<String, String>();
 //		  properties.put("javax.persistence.jdbc.user", "root");
 //		  properties.put("javax.persistence.jdbc.password", "");
-		  EntityManagerFactory emf = Persistence.createEntityManagerFactory("TopPatiekalaiAtaskaita");   // Persistence.createEntityManagerFactory( "jdbc:mysql://localhost:3306/spring_jpa/kavine;user=root;password=");		
+//		  EntityManagerFactory emf = Persistence.createEntityManagerFactory("TopPatiekalaiAtaskaita");   // Persistence.createEntityManagerFactory( "jdbc:mysql://localhost:3306/spring_jpa/kavine;user=root;password=");		
 		
-		// EntityManagerFactory emfactory = Persistence.createEntityManagerFactory( "Eclipselink_JPA" );
+	    EntityManagerFactory emf = Persistence.createEntityManagerFactory( "TopPatiekalaiAtaskaita" ); // "Eclipselink_JPA" );
 		EntityManager entitymanager = emf.createEntityManager();
 		
 		TopPatiekalaiAtaskaita tp = new TopPatiekalaiAtaskaita( entitymanager );

@@ -1,22 +1,25 @@
 package kaviney;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.List;
 
 
+import javax.persistence.PersistenceContext;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.*;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+// import org.springframework.data.repository.CrudRepository;
+// import org.springframework.stereotype.Repository;
 
-@Repository
+//@Repository
 public class TopPatiekalaiAtaskaita {
 	
-      // @PersistenceContext(unitName="TopPatiekalaiAtaskaita")	
+      // @Autowired //(unitName="TopPatiekalaiAtaskaita")	
 	  protected EntityManager em;	
 	
-	  public TopPatiekalaiAtaskaita(EntityManager em) {
+	  public TopPatiekalaiAtaskaita(  EntityManager em  ) {
 		  
 		    this.em = em;
 	  }	
