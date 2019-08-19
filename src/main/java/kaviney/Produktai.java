@@ -22,6 +22,8 @@ public class Produktai {
     private Double kaina;
     
     private Double kiekis_sand;
+    
+//    private Double kiekis;
 
 	public Integer getId() {
 		return id;
@@ -69,7 +71,17 @@ public class Produktai {
 		
 		this.kiekis_sand = kiekis_sand;
 	}
-	
+/*	
+	public Double getKiekis() {
+		
+		return kiekis;
+	}
+
+	public void setKiekis(Double kiekis) {
+		
+		this.kiekis = kiekis;
+	}	
+*/	
 	public Double getKaina() {
 		return kaina;
 	}

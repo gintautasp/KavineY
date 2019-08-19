@@ -8,7 +8,24 @@
 				background-color: lightblue;
 			}
 			.ivykdytas, .sivykdytas {
-				background-color: lightgreen;
+				background
+				-color: lightgreen;
+			}
+			#uzsakymo_forma {
+				padding: 12px;
+				width: 700px;
+				background-color: BurlyWood;
+			}
+			#sudetis {
+			
+				float: right;
+			}
+			table {
+				border-collapse: collapse;
+			}
+			th, th {
+				border: 1x solid black;
+				padding: 4px 3px;
 			}
 		</style>
 	    <script
@@ -72,6 +89,17 @@
 							$( '#trukme_kaitinimo' ).val( patiekalai [ i ].trukme_kaitinimo  );
 							$( '#kaina' ).val( patiekalai [ i ].kaina );	
 							$( '#id_patiekalo' ).val( patiekalai [ i ].id );
+							
+							html_sudetis = '<table><caption>sudėtis</caption><tr><th>produktas</th></tr>' // '<th>kiekis</th></tr>';
+							
+							alert( JSON.stringify ( patiekalai) );
+							
+							for ( i_prod = 0; i_prod < patiekalai[ i ].produktai.length; i_prod++ ) {
+							
+								html_sudetis += '<tr><td>' + patiekalai[ i ].produktai [ i_prod ].pav + '</td></tr>' ; // '<td>' + patiekalai.produktai [ i_prod ].kiekis + '</td></tr>';
+							}
+							html_sudetis += '</table>';
+							$( '#sudetis' ).html ( html_sudetis );
 						});
 					}
 			);		
@@ -230,23 +258,27 @@
 	    </script>
 </head>
 <body>
-	<form action="">
-		<div id="patiekalu_parinkimas">
+	<div id="uzsakymo_forma">
+		<div id="sudetis">
 		</div>
-		<br>
-		Patiekalo pavadinimas<br>
-		<input type="text" id="pav" value=""><br><br>
-		Trukme ruošimo<br>
-		<input type="text" id="trukme_ruosimo" value=""><br><br>
-		Trukme kaitinimo<br>
-		<input type="text" id="trukme_kaitinimo" value=""><br><br>
-		Klientas<br>
-		<input type="text" id="klientas" value=""><br><br>
-		Kaina<br>
-		<input type="text" id="kaina" value=""><br><br>		
-		<input type="hidden" id="id_patiekalo" value="0">
-		<input type="button" id="naujas_uzsakymas" value="Uzsakyti">
-	</form>
+		<form action="">
+			<div id="patiekalu_parinkimas">
+			</div>
+			<br>
+			Patiekalo pavadinimas<br>
+			<input type="text" id="pav" value=""><br><br>
+			Trukme ruošimo<br>
+			<input type="text" id="trukme_ruosimo" value=""><br><br>
+			Trukme kaitinimo<br>
+			<input type="text" id="trukme_kaitinimo" value=""><br><br>
+			Klientas<br>
+			<input type="text" id="klientas" value=""><br><br>
+			Kaina<br>
+			<input type="text" id="kaina" value=""><br><br>		
+			<input type="hidden" id="id_patiekalo" value="0">
+			<input type="button" id="naujas_uzsakymas" value="Uzsakyti">
+		</form>
+          </div>
 	<div id="uzsakymai">
 	</div>
 </body>

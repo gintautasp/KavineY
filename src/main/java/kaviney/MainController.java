@@ -98,6 +98,19 @@ public class MainController {
 		return patiekalaiRepository.findAll();
 	}	
 	
+	@GetMapping(path="/patiekalas")
+	public @ResponseBody Optional<Patiekalai> getPatiekalas(@RequestParam Integer id) {
+		// This returns a JSON or XML with the users
+		Optional <Patiekalai> found = patiekalaiRepository.findById( id );		
+		/*
+		if ( found.isPresent() ) {
+			
+			   Uzsakymai n = found.get();
+			}	
+		*/	
+		return found;
+	}	
+	
 	@GetMapping(path="/all")
 	public @ResponseBody Iterable<Uzsakymai> getAllUzsakymai() {
 		// This returns a JSON or XML with the users
