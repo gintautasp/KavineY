@@ -131,7 +131,7 @@ public class MainController {
 		
 	    EntityManagerFactory emf = Persistence.createEntityManagerFactory( "TopPatiekalaiAtaskaita" ); // "Eclipselink_JPA" );
 		EntityManager entitymanager = emf.createEntityManager();
-		
+				
 		TopPatiekalaiAtaskaita tp = new TopPatiekalaiAtaskaita( entitymanager );
 
 		return tp.topPatiekalai(laikotarpis_nuo, laikotarpis_iki);
