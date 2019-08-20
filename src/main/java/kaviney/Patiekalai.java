@@ -21,11 +21,11 @@ public class Patiekalai {
     private Integer trukme_kaitinimo;    
     
     private Double kaina;
-    
+/*    
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "patiekalu_produktai", joinColumns = @JoinColumn(name = "id_patiekalo", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "id_produkto", referencedColumnName = "id"))  
     private Set<Produktai> produktai;    
-
+*/;
 	public Integer getId() {
 		return id;
 	}
@@ -65,7 +65,7 @@ public class Patiekalai {
 	public void setKaina(Double kaina) {
 		this.kaina = kaina;
 	}
-	
+/*	
     public Set<Produktai> getProduktai() {
         return produktai;
     }
@@ -73,4 +73,5 @@ public class Patiekalai {
     public void setProduktai(Set<Produktai> produktai) {
         this.produktai = produktai;
     }
+*/
 }
