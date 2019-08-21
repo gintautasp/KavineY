@@ -6,7 +6,7 @@ import javax.persistence.*;
 // import javax.persistence.GenerationType;
 // import javax.persistence.Id;
 
-import java.util.Set;
+import java.util.List;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class Patiekalai {
@@ -21,11 +21,10 @@ public class Patiekalai {
     private Integer trukme_kaitinimo;    
     
     private Double kaina;
-/*    
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "patiekalu_produktai", joinColumns = @JoinColumn(name = "id_patiekalo", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "id_produkto", referencedColumnName = "id"))  
-    private Set<Produktai> produktai;    
-*/;
+    
+    @OneToMany(mappedBy = "patiekalai",cascade = CascadeType.ALL)
+    private List<Patiekalu_produktai> patiekalu_produktai;    
+
 	public Integer getId() {
 		return id;
 	}
@@ -65,13 +64,13 @@ public class Patiekalai {
 	public void setKaina(Double kaina) {
 		this.kaina = kaina;
 	}
-/*	
-    public Set<Produktai> getProduktai() {
-        return produktai;
-    }
-
-    public void setProduktai(Set<Produktai> produktai) {
-        this.produktai = produktai;
-    }
-*/
+	
+	public List<Patiekalu_produktai> getPatiekalu_produktai() {
+		
+		return patiekalu_produktai;
+	}
+	public void setPatiekalu_produktai (List<Patiekalu_produktai> patiekalu_produktai) {
+		
+		this.patiekalu_produktai = patiekalu_produktai;
+	}
 }

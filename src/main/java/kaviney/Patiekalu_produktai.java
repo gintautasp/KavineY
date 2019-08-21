@@ -14,15 +14,16 @@ public class Patiekalu_produktai implements Serializable {
 
     private Double kiekis_produkto;	
     
-    public Patiekalu_produktai() {
-    	
-    }
-    
     @ManyToOne
-    @JoinTable(name = "patiekalai", joinColumns = @JoinColumn(name = "id_patiekalo", referencedColumnName = "id"))      
     private Patiekalai patiekalai;
 
-
+    @ManyToOne
+    private Produktai produktai; 
+    
+    public Patiekalu_produktai() {
+    	
+    }    
+    
     public Integer getId () {
     	return id;
     }
@@ -31,22 +32,29 @@ public class Patiekalu_produktai implements Serializable {
     	
     	this.id = id;
     } 
-    
+/*   
     public Patiekalai getPatiekalai () {
     	return patiekalai;
     }
     
-    public void setPatiekalai( Patiekalai patiekalai ) {
+    public void setPatiekalai ( Patiekalai patiekalai ) {
     	
     	this.patiekalai = patiekalai;
-    }     
-        
-    
-    
+    }             
+*/    
     public Double getKiekis_produkto () {
     	
     	return kiekis_produkto;
     }
+    
+    public Produktai getProduktai () {
+    	return produktai;
+    }
+
+    public void setProduktai( Produktai produktai ) {
+	
+    	this.produktai = produktai;
+    }     
     
     public void setKiekis_produkto( Double kiekis_produkto ) {
     	
