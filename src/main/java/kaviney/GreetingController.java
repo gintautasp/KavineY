@@ -24,6 +24,12 @@ public class GreetingController {
         return "paruosimas";
     }    
     
+    @GetMapping("/patiekalai")
+    public String patiekalai(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
+        model.addAttribute("name", name);
+        return "patiekalai";
+    }   
+    
     @GetMapping("/info")
     public String info() {
     	return "info";
@@ -33,7 +39,11 @@ public class GreetingController {
     public String inforaides() {
     	return "info";
     }    
-       
+    
+    @GetMapping("/patiekalairaides17")
+    public String patiekalairaides() {
+    	return "patiekalai";
+    }    
     @GetMapping("/uzsakymaivoo1xmpppwyu")
     public String uzsakymaix(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
         model.addAttribute("name", name);

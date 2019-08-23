@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Patiekalų sąrašas</title>
+    <meta charset="utf-8">
+		<style>
+			.anuliuotas, .sanuliuotas {
+				background-color: lightblue;
+			}
+			.ivykdytas, .sivykdytas {
+				background-color: lightgreen;
+			}
+		</style>
+	    <script
+		src="https://code.jquery.com/jquery-3.4.1.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+		crossorigin="anonymous">
+	    </script>
+	    <script>
+		$(document).ready ( function() {
+					
+		paiimtiPatiekalus();
+		
+		function paiimtiPatiekalus() {
+		
+			$.ajax(
+				{
+					url: "http://localhost:8080/restfull/lst-patiekalai" 
+													
+				}
+			)
+			.done(
+					function( data ) {
+															// alert ( 'jquery ok ' + data );
+						res_str = '<table>'
+								+ '<tr>'
+									+ '<th rowspan="2">id</th>'
+									+ '<th rowspan="2">pav</th>'
+									+ '<th colspan="2">trukmė</th>'
+									+ '<th rowspan="2">kaina</th>'
+									+ '<th rowspan="2">prod.<br>kiekis</th>'
+									+ '<th rowspan="2">veiksmai</th>'									
+									+ '<th rowspan="2"><input type="button" class="ivesti" value="naujas"></th>'									
+								+ '</tr>'
+								+ '<tr><th>ruošimo</th><th>kaitinimo</th></tr>';
+						
+						for ( i = 0; i < data.length; i++) {
+						
+							res_str += '<tr class="s' + '" data-id="' + data [ i ].id  +'" >'
+								+ '<td>' + data [ i ].id + '</td>' 
+								+ '<td>' + data [ i ].pav + '</td>'
+								+ '<td>' + data [ i ].trukme_ruosimo + '</td>'
+								+ '<td>' + data [ i ].trukme_kaitinimo + '</td>'
+								+ '<td>' + data [ i ].kaina + '</td>'
+								+ '<td>' + data [ i ].prod_kiekis + '</td>'
+								+ '<td><input type="button" class="anuliuotas" value="šalinti"></td>'
+								+ '<td><input type="button" class="ivykdytas" value="redaguoti"></td>'
+								;
+								
+							
+							//if ( data [ i ].busena == 'uzsakytas' ) {	
+							
+								//res_str +=
+								
+									//'<td><input type="button" class="anuliuotas" value="šalinti"></td>'
+									//+ '<td><input type="button" class="ivykdytas" value="redaguoti"></td>'
+							//}
+							res_str += '</tr>';
+						}
+						
+						res_str += '</table>'
+						$( '#uzsakymai' ).html ( res_str );
+						
+						$( '.anuliuotas' ).on ( 'click', function() {
+						
+							$( this ).each ( function() {
+								
+								id_uzsakymo = $( this ).parent( ).parent().data ( 'id' );
+
+								keistiBusena ( id_uzsakymo, 'anuliuotas' );
+							});
+						});
+						
+						$( '.ivykdytas' ).on ( 'click', function() {
+						
+							$( this ).each ( function() {
+								
+								id_uzsakymo = $( this ).parent( ).parent().data ( 'id' );
+
+								keistiBusena ( id_uzsakymo, 'ivykdytas' );
+							});
+						});
+					}
+			);		
+		}
+		
+		$( '#naujas_uzsakymas' ).click( function() {
+		
+			alert ( 'vykdomas ' );
+		
+			uzsakymas = {
+				
+				pav: $( '#pav' ).val()
+				, trukme_ruosimo: parseInt ( $( '#trukme_ruosimo' ).val() )
+				, trukme_kaitinimo: parseInt ( $( '#trukme_kaitinimo' ).val() )
+			}
+			
+			// alert ( 'uzsakymas  ' + uzsakymas.pav + ' ' );
+			
+			params_str = 
+				"pav="  + uzsakymas.pav 
+				+ '&trukme_ruosimo=' + uzsakymas.trukme_ruosimo 
+				+ '&trukme_kaitinimo=' + uzsakymas.trukme_kaitinimo 
+				
+			alert ( "http://localhost:8080/restfull/add?" + params_str );
+				
+			$.ajax(
+				{
+					url: "http://localhost:8080/restfull/add?" + params_str
+				}
+			)
+			.done( function( data ) {
+				
+				alert ( data );
+				pasiimtiUzsakymus();
+			});
+		} );
+	});	
+	    </script>
+</head>
+<body>
+	<!--
+	<form action="">
+		Patiekalo pavadinimas<br>
+		<input type="text" id="pav" value=""><br><br>
+		Trukmė ruošimo<br>
+		<input type="text" id="trukme_ruosimo" value=""><br><br>
+		Trukmė kaitinimo<br>
+		<input type="text" id="trukme_kaitinimo" value=""><br><br>
+		Kaina<br>
+		<input type="text" id="kaina" value=""><br><br>
+		Produktų kiekis<br>
+		<input type="text" id="prod_kiekis" value=""><br><br>
+		<input type="button" id="naujas_uzsakymas" value="Užsakyti">
+	</form
+	-->
+	<div id="uzsakymai">
+	</div>
+</body>
+</html>
