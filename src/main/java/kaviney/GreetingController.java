@@ -22,7 +22,13 @@ public class GreetingController {
     public String paruosimas(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
         model.addAttribute("name", name);
         return "paruosimas";
-    }    
+    }   
+    
+    @GetMapping("/produktai")
+    public String produktai(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
+        model.addAttribute("name", name);
+        return "produktai";
+    }     
     
     @GetMapping("/patiekalai")
     public String patiekalai(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
@@ -44,7 +50,13 @@ public class GreetingController {
     public String patiekalairaides() {
     	return "patiekalai";
     }    
-    @GetMapping("/uzsakymaivoo1xmpppwyu")
+    
+    @GetMapping("/produktairaides37")
+    public String produktairaides() {
+    	return "produktai";
+    }     
+    
+    @GetMapping("/uzsakymaivoo7xmpppwyu")
     public String uzsakymaix(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
         model.addAttribute("name", name);
         return "paruosimas";

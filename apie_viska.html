@@ -1,0 +1,43 @@
+Kliento pusė
+-----------------------------------
+Html + Javascript (jquery) + css
+--------------
+| jquery ui  |
+--------------
+
+siunčiama užklausa į  serverį
+1. tiesiog iš adreso eilutės parašydamas url
+2. iš html formos kurios action atributas nurodo url dalį (dažniausiai tuščias nurodo į save patį)
+3. kreipiniai su Javascript ajax (RESTfull) 
+
+2 ir 3 gali vykti skirtingais 2-iems skirtingais  duomenų siuntimo į serverį metodais post, get (2-u budu method atributas ir nurodo ar get ar post):
+
+uzsakymai?veiksmas=gauti&and;id=311  &lt;- get kreipinio pavyzdys, duomenys siunčiami surašyti per url 
+
+uzsakymai &lt;- post nesimato per url
+
+galima naudoti abu parašius url su duomenimis, bet ir siuntu post`u
+
+
+
+
+Serverio pusė
+----------------------------------
+Spring`as pagal kontrolerių metodų anotacijas atrenka kurį konetrolerio vykdyti pagal užklausą ir kokius paramertus pasiimti iš url ir perduoti kontrolerio metodui
+kontroleryje 
+		atliekame veiksmus, kviečiame modelių klases, kurios dirba sus duomenimis
+							-------------------
+	ir 
+		gražiname paruoštą rezultatą arba view`o templato pavadinimą *.html
+		
+		
+modeliai 
+	dirbantys su lentelėmis 
+		pagal JPA (java persistence api) architekturą, gali būti tiesiog anotacijomis susieti su lentelėmis ir ryšiais tarp lentelių
+-----------
+
+
+-----------------------------------------------------------
+| MySQL(arba MariaDB) // NoSQL, SQLite 	|
+| paparastas *.txt arba *.csv		     		|
+------------------------------------------------------------
