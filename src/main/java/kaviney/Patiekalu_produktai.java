@@ -1,6 +1,9 @@
 package kaviney;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 
 @Entity
@@ -17,6 +20,7 @@ public class Patiekalu_produktai implements Serializable {
     @ManyToOne
     private Patiekalai patiekalai;
 
+    @JsonIgnoreProperties("patiekalu_produktai")
     @ManyToOne
     private Produktai produktai; 
     
