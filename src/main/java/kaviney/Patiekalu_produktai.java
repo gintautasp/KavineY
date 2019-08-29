@@ -51,7 +51,7 @@ public class Patiekalu_produktai implements Serializable {
     	
     	this.kiekis_produkto = kiekis_produkto;
     }    
-/*    
+    
     public Produktai getProduktai () {
     	return produktai;
     }
@@ -59,10 +59,7 @@ public class Patiekalu_produktai implements Serializable {
     public void setProduktai( Produktai produktai ) {
 	
     	this.produktai = produktai;
-    }     
-*/    
-   
-    
+    }    
 }
 
 

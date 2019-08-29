@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity // This tells Hibernate to make a table out of this class
 public class Produktai {
     @Id
@@ -27,7 +29,8 @@ public class Produktai {
     
     private Double kiekis_sand;
     
-    @OneToMany(mappedBy = "patiekalai",cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("produktai")
+    @OneToMany(mappedBy = "produktai",cascade = CascadeType.ALL)
     private List<Patiekalu_produktai> patiekalu_produktai; 
 
 	public Integer getId() {
