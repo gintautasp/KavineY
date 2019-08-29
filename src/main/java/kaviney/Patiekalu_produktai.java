@@ -47,6 +47,11 @@ public class Patiekalu_produktai implements Serializable {
     	return kiekis_produkto;
     }
     
+    public void setKiekis_produkto( Double kiekis_produkto ) {
+    	
+    	this.kiekis_produkto = kiekis_produkto;
+    }    
+/*    
     public Produktai getProduktai () {
     	return produktai;
     }
@@ -55,11 +60,8 @@ public class Patiekalu_produktai implements Serializable {
 	
     	this.produktai = produktai;
     }     
-    
-    public void setKiekis_produkto( Double kiekis_produkto ) {
-    	
-    	this.kiekis_produkto = kiekis_produkto;
-    }    
+*/    
+   
     
 }
 

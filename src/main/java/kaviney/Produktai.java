@@ -1,9 +1,13 @@
 package kaviney;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class Produktai {
@@ -23,7 +27,8 @@ public class Produktai {
     
     private Double kiekis_sand;
     
-//    private Double kiekis;
+    @OneToMany(mappedBy = "patiekalai",cascade = CascadeType.ALL)
+    private List<Patiekalu_produktai> patiekalu_produktai; 
 
 	public Integer getId() {
 		return id;
@@ -71,17 +76,16 @@ public class Produktai {
 		
 		this.kiekis_sand = kiekis_sand;
 	}
-/*	
-	public Double getKiekis() {
-		
-		return kiekis;
-	}
 
-	public void setKiekis(Double kiekis) {
+	public List<Patiekalu_produktai> getPatiekalu_produktai() {
 		
-		this.kiekis = kiekis;
-	}	
-*/	
+		return patiekalu_produktai;
+	}
+	public void setPatiekalu_produktai (List<Patiekalu_produktai> patiekalu_produktai) {
+		
+		this.patiekalu_produktai = patiekalu_produktai;
+	}
+	
 	public Double getKaina() {
 		return kaina;
 	}
