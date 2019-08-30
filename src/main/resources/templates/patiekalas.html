@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Patiekalų sąrašas</title>
+    <title>Patiekalo informacija</title>
     <meta charset="utf-8">
 		<style>
 			.anuliuotas, .sanuliuotas {
@@ -18,20 +18,59 @@
 	    </script>
 	    <script>
 		$(document).ready ( function() {
-					
-		paiimtiPatiekalus();
 		
-		function paiimtiPatiekalus() {
+		var id;
+		
+		// let
+		searchParams = new URLSearchParams(window.location.search);
+		
+		$.ajax({
+		  url: "crud.js",
+		  dataType: "script",
+		  // success: success
+		});		
+		
+		if ( searchParams.has( 'id' )  ) {
+		
+			id = searchParams.get( 'id' )
+		
+			alert ( 'ok, '  + id  );
+			
+			crud_patiekalo_produktu = new crud ( 
+				/*
+				{ 
+					"patiekalu_produktai": {
+						"kiekis_produkto": ""
+						,"produktai":
+							[ "id","pav","mat_vnt", "mato_kiekis", "kaina", "kiekis_sand " ]
+					}
+				}
+				*/
+				[]
+				, [  'kiekis_produkto', 'id', 'pav', 'mat.<br>vnt.', 'mat.<br>kiekis', 'kaina', 'kiekis<br>sand.' ]
+				, 'url: "http://localhost:8080/restfull/patiekalas?id="' + id 
+			);
+			
+			crud_patiekalo_produktu.sarasas();
+			crud_patiekalo_produktu.
+			$( '#patiekalas' ).html ( crud_patiekalo_produktu.res_str );			
+			
+		}		
+		
+		function paiimtiPatiekala() {
 		
 			$.ajax(
 				{
-					url: "http://localhost:8080/restfull/lst-patiekalai" 
+					
 													
 				}
 			)
 			.done(
 					function( data ) {
-															// alert ( 'jquery ok ' + data );
+					
+					
+						alert ( 'jquery ok ' + data );
+						/*
 						res_str = '<table>'
 								+ '<tr>'
 									+ '<th rowspan="2">id</th>'
@@ -55,7 +94,7 @@
 								+ '<td>' + data [ i ].prod_kiekis + '</td>'
 								+ '<td><input type="button" class="anuliuotas" value="šalinti"></td>'
 								+ '<td><input type="button" class="ivykdytas" value="redaguoti"></td>'
-								+ '<td><a href="/patiekalas?id=' + data [ i ].id  +'" class="details">plačiau</a></td>'
+								+ '<td><a href="/patiekalas?id=' + data [ i ].id  +'" class="details" value="plačiau"></td>'
 									;
 							
 							//if ( data [ i ].busena == 'uzsakytas' ) {	
@@ -90,10 +129,12 @@
 								keistiBusena ( id_uzsakymo, 'ivykdytas' );
 							});
 						});
+						*/
 					}
-			);		
+			);
+			
 		}
-		
+		/*
 		$( '#naujas_uzsakymas' ).click( function() {
 		
 			alert ( 'vykdomas ' );
@@ -125,26 +166,12 @@
 				pasiimtiUzsakymus();
 			});
 		} );
+		*/
 	});	
 	    </script>
 </head>
 <body>
-	<!--
-	<form action="">
-		Patiekalo pavadinimas<br>
-		<input type="text" id="pav" value=""><br><br>
-		Trukmė ruošimo<br>
-		<input type="text" id="trukme_ruosimo" value=""><br><br>
-		Trukmė kaitinimo<br>
-		<input type="text" id="trukme_kaitinimo" value=""><br><br>
-		Kaina<br>
-		<input type="text" id="kaina" value=""><br><br>
-		Produktų kiekis<br>
-		<input type="text" id="prod_kiekis" value=""><br><br>
-		<input type="button" id="naujas_uzsakymas" value="Užsakyti">
-	</form
-	-->
-	<div id="uzsakymai">
+	<div id="patiekalas">
 	</div>
 </body>
 </html>

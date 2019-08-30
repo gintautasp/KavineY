@@ -144,7 +144,17 @@ public class MainController {
 		// This returns a JSON or XML with the users
 		return patiekalaiRepository.findAll();
 	}
-	
+/*	-- kažkodėl prašė template'o 
+ * 
+    @GetMapping("/patiekalas1")
+    public Patiekalai patiekalas1(@RequestParam Integer id) {
+    	
+    	// This returns a JSON or XML with the users
+    	Optional <Patiekalai> found =  patiekalaiRepository.findById( id );
+		Patiekalai n = found.get();
+    	return n;
+   } 	
+*/	
 	@GetMapping(path="/lst-produktai")
 	public @ResponseBody Iterable<Produktai> getAllProduktai() {
 		// This returns a JSON or XML with the users

@@ -34,7 +34,13 @@ public class GreetingController {
     public String patiekalai(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
         model.addAttribute("name", name);
         return "patiekalai";
-    }   
+    }  
+    
+    @GetMapping("/patiekalas")
+    public String patiekalas(@RequestParam Integer id) {
+
+        return "patiekalas";
+    }
     
     @GetMapping("/info")
     public String info() {
@@ -46,12 +52,12 @@ public class GreetingController {
     	return "info";
     }    
     
-    @GetMapping("/patiekalairaides17")
+    @GetMapping("/patiekalairaides27")
     public String patiekalairaides() {
     	return "patiekalai";
     }    
     
-    @GetMapping("/produktairaides37")
+    @GetMapping("/produktairaides38")
     public String produktairaides() {
     	return "produktai";
     }     
@@ -65,6 +71,12 @@ public class GreetingController {
     @RequestMapping("/simple")
     public @ResponseBody String greeting() {
         return "Hello Simple";
-    }    
+    }   
+    
+    @GetMapping("/ind")
+    public String ind(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
+        model.addAttribute("name", name);
+        return "index";
+    }     
 
 }
