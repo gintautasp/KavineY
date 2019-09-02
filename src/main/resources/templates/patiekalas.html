@@ -10,12 +10,23 @@
 			.ivykdytas, .sivykdytas {
 				background-color: lightgreen;
 			}
+			table {
+				border-collapse: colapse;
+			}
+			th {
+				background-color: lightgreen;			
+			}
+			th, td {
+				padding: 6px;
+				border: 1px solid grey;
+			}
 		</style>
 	    <script
 		src="https://code.jquery.com/jquery-3.4.1.min.js"
 		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 		crossorigin="anonymous">
 	    </script>
+	    <script src="crud.js"></script>
 	    <script>
 		$(document).ready ( function() {
 		
@@ -23,13 +34,16 @@
 		
 		// let
 		searchParams = new URLSearchParams(window.location.search);
-		
+/*		
 		$.ajax({
 		  url: "crud.js",
 		  dataType: "script",
-		  // success: success
+		  success: function() {
+		  
+			alert ( 'script ok' );
+		  }
 		});		
-		
+*/		
 		if ( searchParams.has( 'id' )  ) {
 		
 			id = searchParams.get( 'id' )
@@ -46,15 +60,20 @@
 					}
 				}
 				*/
-				[]
-				, [  'kiekis_produkto', 'id', 'pav', 'mat.<br>vnt.', 'mat.<br>kiekis', 'kaina', 'kiekis<br>sand.' ]
-				, 'url: "http://localhost:8080/restfull/patiekalas?id="' + id 
+				[
+					'kiekis_produkto'
+					, 'produktai.id'
+					, 'produktai.pav'
+					, 'produktai.mat_vnt'
+					, 'produktai.mato_kiekis'
+					, 'produktai.kaina'
+					, 'produktai.kiekis_sand'
+				]
+				, [  'kiekis<br>prod-<br>ukto', 'id', 'pav', 'mat.<br>vnt.', 'mat.<br>kiekis', 'kaina', 'kiekis<br>sand.' ]
+				, 'http://localhost:8080/restfull/patiekalas?id=' + id
+				, '.patiekalu_produktai'
+				, 'patiekalas'
 			);
-			
-			crud_patiekalo_produktu.sarasas();
-			crud_patiekalo_produktu.
-			$( '#patiekalas' ).html ( crud_patiekalo_produktu.res_str );			
-			
 		}		
 		
 		function paiimtiPatiekala() {
@@ -67,7 +86,6 @@
 			)
 			.done(
 					function( data ) {
-					
 					
 						alert ( 'jquery ok ' + data );
 						/*
