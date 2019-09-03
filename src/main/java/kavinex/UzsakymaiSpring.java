@@ -36,7 +36,6 @@ public class UzsakymaiSpring {
 	 * kostruktorius skirtas testavimui
 	 * @param kiek_patiekalu
 	 */
-	
 	public UzsakymaiSpring( int kiek_patiekalu ) {
 		
 		this.patiekalai = new Patiekalas[ kiek_patiekalu ];
