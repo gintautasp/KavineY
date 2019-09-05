@@ -90,6 +90,13 @@
 						
 						for ( i = 0; i < data.length; i++) {
 						
+							disabled = '';
+							
+							if ( data [ i ].patiekalu_produktai.length > 0 ) {
+							
+								disabled = ' disabled';
+							}
+						
 							res_str += '<tr class="s' + '" data-id="' + data [ i ].id  +'" >'
 								+ '<td>' + data [ i ].id + '</td>' 
 								+ '<td>' + data [ i ].pav + '</td>'
@@ -97,7 +104,7 @@
 								+ '<td>' + data [ i ].mato_kiekis + '</td>'
 								+ '<td>' + data [ i ].kaina + '</td>'
 								+ '<td>' + data [ i ].kiekis_sand + '</td>'
-								+ '<td><input type="button" class="anuliuotas" value="šalinti"></td>'
+								+ '<td><input type="button" class="anuliuotas" value="šalinti"' + disabled +'></td>'
 								+ '<td><input type="button" class="redaguoti" value="redaguoti"></td>'
 								;
 							//if ( data [ i ].busena == 'uzsakytas' ) {	

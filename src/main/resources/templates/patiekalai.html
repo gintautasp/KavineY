@@ -46,6 +46,13 @@
 						
 						for ( i = 0; i < data.length; i++) {
 						
+							disabled = '';
+						
+							if ( data[ i ].uzsakymai.length > 0 ) {
+							
+								disabled = ' disabled';
+							}
+						
 							res_str += '<tr class="s' + '" data-id="' + data [ i ].id  +'" >'
 								+ '<td>' + data [ i ].id + '</td>' 
 								+ '<td>' + data [ i ].pav + '</td>'
@@ -53,7 +60,7 @@
 								+ '<td>' + data [ i ].trukme_kaitinimo + '</td>'
 								+ '<td>' + data [ i ].kaina + '</td>'
 								+ '<td>' + data [ i ].prod_kiekis + '</td>'
-								+ '<td><input type="button" class="anuliuotas" value="šalinti"></td>'
+								+ '<td><input type="button" class="anuliuotas" value="šalinti"' +  disabled + '></td>'
 								+ '<td><input type="button" class="ivykdytas" value="redaguoti"></td>'
 								+ '<td><a href="/patiekalas?id=' + data [ i ].id  +'" class="details">plačiau</a></td>'
 									;

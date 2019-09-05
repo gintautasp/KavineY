@@ -52,7 +52,7 @@ public class GreetingController {
     	return "info";
     }    
     
-    @GetMapping("/patiekalairaides98")
+    @GetMapping("/patiekalairaides104")
     public String patiekalairaides() {
     	return "patiekalai";
     }    

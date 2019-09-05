@@ -62,7 +62,7 @@
 					this.res_str += '<td>'+ eval (  'this.data' + this.field_data +'[ i ].' + this.fields [ k ] ) + '</td>';
 				}
 				
-				 this.res_str += '<td><input type="button" class="edit_button" value="redaguoti"></td><td><input  type="button" class="delete_button" value="šalinti"></td></tr>';
+				 this.res_str += '<td><input type="button" class="edit_button" value="redaguoti"><input  type="button" class="delete_button" value="šalinti"></td></tr>';
 			} 
 			this.res_str += '</table>';
 			
@@ -113,10 +113,9 @@
 			}
 			this.res_str += 
 			
-				'<th>veiksmai</th>'									
-				+ '<th><input type="button" class="ivesti" value="naujas" id="naujas"></th>'			
-				+ '</tr>'
-			;
+				'<th>veiksmai ' +									
+					'<input type="button" class="new_button" value="naujas" id="naujas"></th>' +
+				'</tr>';
 																													// alert ( this.res_str );
 		}
 		
