@@ -99,6 +99,47 @@ public class MainController {
 		return res;
 	}
 	
+	@GetMapping(path="/patiekalo-produktas") // Map ONLY GET Requests
+	public @ResponseBody String saugotiProduktaPatiekalo (@RequestParam Integer id 
+			, @RequestParam Double kiekis_produkto
+			, @RequestParam(defaultValue="0") Integer id_prod
+			, @RequestParam(defaultValue="0") Integer id_pat
+			) {
+		// @ResponseBody means the returned String is the response, not a view name
+		// @RequestParam means it is a parameter from the GET or POST request
+		
+		String res = "Not done";
+		Patiekalu_produktai n = new Patiekalu_produktai();
+		
+		if (id > 0) {
+		
+			Optional <Patiekalu_produktai> found = patiekalu_produktaiRepository.findById( id );
+		
+			// variantas trynimuiui
+			// uzsakymaiRepository.deleteById(id);
+		
+			if ( found.isPresent() ) {
+			
+			   n = found.get();
+			   n.setId(id);
+			}
+			
+		} else {
+		
+			if ( ( id_prod > 0 ) && ( id_pat > 0 ) ) {
+				
+				n.setProduktai_id ( id_prod );
+				n.setPatiekalai_id( id_pat );
+			}
+		}
+		n.setKiekis_produkto ( kiekis_produkto );
+			   			   
+		patiekalu_produktaiRepository.save(n);	
+		res = "Saved";
+	    
+		return res;
+	}	
+	
 	@GetMapping(path="/saugoti-produkta") // Map ONLY GET Requests
 	public @ResponseBody String saugotiProdukta (@RequestParam Integer id 
 			, @RequestParam String pav

@@ -50,23 +50,7 @@ public class GreetingController {
     @GetMapping("/inforaides001")
     public String inforaides() {
     	return "info";
-    }    
-    
-    @GetMapping("/patiekalairaides104")
-    public String patiekalairaides() {
-    	return "patiekalai";
-    }    
-    
-    @GetMapping("/produktairaides38")
-    public String produktairaides() {
-    	return "produktai";
-    }     
-    
-    @GetMapping("/uzsakymaivoo7xmpppwyu")
-    public String uzsakymaix(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
-        model.addAttribute("name", name);
-        return "paruosimas";
-    }    
+    } 
     
     @RequestMapping("/simple")
     public @ResponseBody String greeting() {

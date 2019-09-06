@@ -14,6 +14,12 @@ public class Patiekalu_produktai implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)	
 	private Integer id;
+    
+    @Column(insertable=false, updatable=false)
+    private Integer patiekalai_id;
+   
+    @Column(insertable=false, updatable=false)    
+    private Integer produktai_id;
 
     private Double kiekis_produkto;	
     
@@ -63,6 +69,26 @@ public class Patiekalu_produktai implements Serializable {
     public void setProduktai( Produktai produktai ) {
 	
     	this.produktai = produktai;
+    }
+    
+    public void setProduktai_id ( Integer produktai_id ) {
+    	
+    	this.produktai_id = produktai_id;
+    }
+    
+    public Integer getProduktai_id () {
+    	
+    	return this.produktai_id;
+    }
+    
+    public void setPatiekalai_id ( Integer patiekalai_id ) {
+    	
+    	this.patiekalai_id = patiekalai_id;
+    }
+    
+    public Integer getPatieklai_id () {
+    	
+    	return this.patiekalai_id;
     }    
 }
 

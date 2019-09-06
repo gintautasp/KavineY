@@ -5,7 +5,23 @@
 	*param field_data jei duomenu masyvas giliau tai lauko pavadiniamas, su tasku pradzioje, jei dar giliau - lauku seka, su taskais, bet butinai su tasku pradzioje, kitu atveju tuscias stringas
 	*/
 
-	function crud ( fields, fields_names, url, field_data, fields_ids, id_html_saraso, id_html_dialog_formos, dialog_size_x, dialog_size_y, title_dialog_form, url_save_rec  ) {
+	function crud ( 
+		
+		fields
+		, fields_names
+		, url
+		, field_data
+		, fields_ids
+		, id_html_saraso
+		, id_html_dialog_formos
+		, dialog_size_x
+		, dialog_size_y
+		, title_dialog_form
+		, url_save_rec  
+		, url_delete_rec
+		, fields_edit
+		, field_name
+	) {
 		
 		this.fields = fields;
 		this.fields_names = fields_names;
@@ -20,30 +36,38 @@
 		
 		this.dialog = null;
 		this.form = null;
-		this.ed_fields = [];
+		this.ed_fields = fields_edit;
+		this.o_ed_fields = [];
+		this.field_name = field_name;
+		
 		this.allFields = $( [] );
 		
 		this.data = {};
-																														// alert ( 'url: ' + url );
+																																	// alert ( 'url: ' + url );
 		this.res_str = '';
 		
 		var i_am = this;
 		
-		$.ajax(
-				{
-					url: url
-													
-				}
-			)
-			.done(
-				
-				function( data ) {
+		this.refreshData = function() {
+		
+			$.ajax(
+					{
+						url: url
+														
+					}
+				)
+				.done(
+					
+					function( data ) {
 
-					i_am.data = data;
-																														// alert ( 'this.data 1 ' +JSON.stringify ( i_am.data  ) );
-					i_am.sarasas();
-				}
-			);
+						i_am.data = data;
+																																		// alert ( 'this.data 1 ' +JSON.stringify ( i_am.data  ) );
+						i_am.sarasas();
+					}
+				);
+		}
+		
+		this.refreshData();		
 
 		this.sarasas = function() {
 			
@@ -78,9 +102,11 @@
 			
 			$( "#naujas" ).button().on( "click", function() {
 				
-			      $( '#id_prod' ).val(  '0' );
+				$( '#name_item' ).html ( 'Naujas ' + i_am.title_dialog_form );
 				
-			      i_am.dialog.dialog( "open" );
+			        $( '#id_prod' ).val(  '0' );
+				
+			        i_am.dialog.dialog( "open" );
 			});				
 			
 			$( '.edit_button' ).on ( 'click', function() {
@@ -96,6 +122,8 @@
 																															// alert (  i_am.fields [ k ]  + ': ' + field_val );
 					$( '#' +  i_am.fields_ids [ k ] ).val ( field_val );
 				}
+				
+				$( '#name_item' ).html ( eval (  'i_am.data' + i_am.field_data + '[ i_record ].' + i_am.field_name ) );
 				
 				$( '#id_rec' ).val ( id_record );
 				i_am.dialog.dialog( "open" );				
@@ -139,19 +167,12 @@
 			
 				'<div id="dialogo_forma" title="' + this.title_dialog_form + '">' +
 					'<p class="validateTips">Visi laukeliai turi buti užpildyti.</p>' +
+					'<p class="name_item" id="name_item"></p>' +
 					'<form action="">' +
 					'<fieldset>'
 			;
 
-			for ( k=0; k < this.fields.length; k++ ) {
-				
-				
-				this.res_str += 
-				
-					'<label for="' + this.fields_ids [ k ] + '">' + this.fields_names [ k ].replace ( '<br>', '' ).replace( '-', '' ) + '</label>' +
-						'<input type="text" name="' + this.fields_ids [ k ] + '" id="' + this.fields_ids [ k ] + '" value="" class="text ui-widget-content ui-corner-all">'
-				;
-			}
+			this.htmDialogoEditFields();
 
 			this.res_str += 			
 			
@@ -162,29 +183,36 @@
 				'</form>' +
 				'</div>'
 			;
-				
-			console.log ( this.res_str );
+																															// console.log ( this.res_str );
 		}
 		
+		this.htmDialogoEditFields = function() {
+		
+			for ( k=0; k < this.fields.length; k++ ) {
+				
+				
+				if ( ( this.ed_fields.length > 0 ) && ( this.ed_fields.indexOf ( this.fields_ids [ k ] ) > -1 ) ) {
+				
+				
+					this.res_str += 
+					
+						'<label for="' + this.fields_ids [ k ] + '">' + this.fields_names [ k ].replace( '-<br>', '' ).replace ( '<br>', ' ' ).replace( '_', '' ) + '</label>' +
+							'<input type="text" name="' + this.fields_ids [ k ] + '" id="' + this.fields_ids [ k ] + '" value="" class="text ui-widget-content ui-corner-all">'
+					;
+				}
+			}		
+		}
+		
+		
 		this.saveRecord = function() {
-		
-															// alert ( 'jquery ok ' + data 
-															/*
-																id
-																pav
-																mat_vnt
-																mato_kiekis
-																kaina
-																kiekis_sand
-															*/		
-		
-			var valid = true;
-			allFields.removeClass( "ui-state-error" );
 			
-			valid = this.validate();
+			var valid = true;
+			i_am.allFields.removeClass( "ui-state-error" );
+			
+			valid = i_am.validate();
 		 
 			id  = $( '#id_rec' ).val();
-			this.sendData ( id );
+			i_am.sendData ( id );
 			 
 			return valid;
 		}
@@ -192,33 +220,41 @@
 		this.edFields = function () {
 		
 			for ( k=0; k < this.fields.length; k++ ) {
+				
+				if ( ( this.ed_fields.length > 0 ) && ( this.ed_fields.indexOf ( this.fields_ids [ k ] ) > -1 ) ) {
 
-				this.ed_fields.push ( $ ( '#' + this.fields [ k ] ) );
-				this.allFields.add( this.ed_fields [ k ]  );
+					this.o_ed_fields.push ( $ ( '#' + this.fields [ k ] ) );
+					this.allFields.add( this.o_ed_fields [ k ]  );
+				}
 			}
 		}
 		
 		this.sendData = function( id ) {
-		
-			params_str = 
-				'id=' + id;
-			;  
 			
-			for ( k=0; k < this.fields.length; k++ ) {
-
-				params_str += '&' + this.fields [ k ] + this.ed_fields [ k ].val(); 
+			params_str = '?';
+			
+			if ( i_am.url_save_rec.indexOf ( '?' ) > -1 ) {
+			
+				params_str = '&';
+			}			
+		
+			params_str += 'id=' + id;  
+			
+			for ( k=0; k < i_am.ed_fields.length; k++ ) {
+				
+				params_str += '&' + i_am.ed_fields [ k ] + '=' + $( '#' + i_am.ed_fields [ k ] ).val();
 			}
 				
 			$.ajax(
 				{
-					url: this.url_save_rec + params_str
+					url: i_am.url_save_rec + params_str
 				}
 			)
 			.done( function( data ) {
 				
-				alert ( data );
-				dialog.dialog ( 'close' );
-				paimtiProduktus();
+																																	// alert ( data );
+				i_am.dialog.dialog ( 'close' );
+				i_am.refreshData(); 																											// paimtiProduktus();
 			});
 		}		
 		

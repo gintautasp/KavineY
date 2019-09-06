@@ -46,180 +46,63 @@
 	    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>	    
 	    <script src="crud.js"></script>
 	    <script>
-		$(document).ready ( function() {
+		$( document ).ready ( function() {
 		
-		var id;
+			var id;
 		
-		// let
-		searchParams = new URLSearchParams(window.location.search);
-/*		
-		$.ajax({
-		  url: "crud.js",
-		  dataType: "script",
-		  success: function() {
-		  
-			alert ( 'script ok' );
-		  }
-		});		
-*/		
-		if ( searchParams.has( 'id' )  ) {
+			// let
+			searchParams = new URLSearchParams(window.location.search);
 		
-			id = searchParams.get( 'id' )
+			if ( searchParams.has( 'id' )  ) {
 		
-			alert ( 'ok, '  + id  );
-			
-			crud_patiekalo_produktu = new crud ( 
-				/*
-				{ 
-					"patiekalu_produktai": {
-						"kiekis_produkto": ""
-						,"produktai":
-							[ "id","pav","mat_vnt", "mato_kiekis", "kaina", "kiekis_sand " ]
-					}
-				}
-				*/
-				[
-					'kiekis_produkto'
-					, 'produktai.id'
+				id = searchParams.get( 'id' )
+																										// alert ( 'ok, '  + id  );
+				crud_patiekalo_produktu = new crud ( 
+					/**
+					* 
+					* pagal struktūra
+					*	{ 
+					*		"patiekalu_produktai": {
+					*			"kiekis_produkto": ""
+					*			,"produktai":
+					*				[ "id","pav","mat_vnt", "mato_kiekis", "kaina", "kiekis_sand " ]
+					*		}
+					*	}
+					*/
+					[
+						'kiekis_produkto'
+						, 'produktai.id'
+						, 'produktai.pav'
+						, 'produktai.mat_vnt'
+						, 'produktai.mato_kiekis'
+						, 'produktai.kaina'
+						, 'produktai.kiekis_sand'
+					]
+					, [  'kiekis<br>prod-<br>ukto', 'id', 'pav', 'mat.<br>vnt.', 'mat.<br>kiekis', 'kaina', 'kiekis<br>sand.' ]
+					, 'http://localhost:8080/restfull/patiekalas?id=' + id
+					, '.patiekalu_produktai'
+					, [
+						'kiekis_produkto'
+						, 'id_prod'
+						, 'pav'
+						, 'mat_vnt'
+						, 'mato_kiekis'
+						, 'kaina'
+						, 'kiekis_sand'
+					]				
+					, 'patiekalas'
+					, ''
+					, 300
+					, 340
+					, 'Ingradientas'
+					,  'http://localhost:8080/restfull/patiekalo-produktas?id_pat=' + id
+					,  'http://localhost:8080/restfull/salinti-produkta?id_pat=' + id
+					, [ 'kiekis_produkto' ]
 					, 'produktai.pav'
-					, 'produktai.mat_vnt'
-					, 'produktai.mato_kiekis'
-					, 'produktai.kaina'
-					, 'produktai.kiekis_sand'
-				]
-				, [  'kiekis<br>prod-<br>ukto', 'id', 'pav', 'mat.<br>vnt.', 'mat.<br>kiekis', 'kaina', 'kiekis<br>sand.' ]
-				, 'http://localhost:8080/restfull/patiekalas?id=' + id
-				, '.patiekalu_produktai'
-				, [
-					'kiekis_produkto'
-					, 'id_prod'
-					, 'pav'
-					, 'mat_vnt'
-					, 'mato_kiekis'
-					, 'kaina'
-					, 'kiekis_sand'
-				]				
-				, 'patiekalas'
-				, ''
-				, 300
-				, 500
-				, 'Ingradientas'
-				,  'http://localhost:8080/restfull/patiekalo-produktas?id_pat=' + id
-				
-			);
-		}		
-		
-		function paiimtiPatiekala() {
-		
-			$.ajax(
-				{
-					
-													
-				}
-			)
-			.done(
-					function( data ) {
-					
-						alert ( 'jquery ok ' + data );
-						/*
-						res_str = '<table>'
-								+ '<tr>'
-									+ '<th rowspan="2">id</th>'
-									+ '<th rowspan="2">pav</th>'
-									+ '<th colspan="2">trukmė</th>'
-									+ '<th rowspan="2">kaina</th>'
-									+ '<th rowspan="2">prod.<br>kiekis</th>'
-									+ '<th rowspan="2">veiksmai</th>'									
-									+ '<th rowspan="2"><input type="button" class="ivesti" value="naujas"></th>'									
-								+ '</tr>'
-								+ '<tr><th>ruošimo</th><th>kaitinimo</th></tr>';
-						
-						for ( i = 0; i < data.length; i++) {
-						
-							res_str += '<tr class="s' + '" data-id="' + data [ i ].id  +'" >'
-								+ '<td>' + data [ i ].id + '</td>' 
-								+ '<td>' + data [ i ].pav + '</td>'
-								+ '<td>' + data [ i ].trukme_ruosimo + '</td>'
-								+ '<td>' + data [ i ].trukme_kaitinimo + '</td>'
-								+ '<td>' + data [ i ].kaina + '</td>'
-								+ '<td>' + data [ i ].prod_kiekis + '</td>'
-								+ '<td><input type="button" class="anuliuotas" value="šalinti"></td>'
-								+ '<td><input type="button" class="ivykdytas" value="redaguoti"></td>'
-								+ '<td><a href="/patiekalas?id=' + data [ i ].id  +'" class="details" value="plačiau"></td>'
-									;
-							
-							//if ( data [ i ].busena == 'uzsakytas' ) {	
-							
-								//res_str +=
-								
-									//'<td><input type="button" class="anuliuotas" value="šalinti"></td>'
-									//+ '<td><input type="button" class="ivykdytas" value="redaguoti"></td>'
-							//}
-							res_str += '</tr>';
-						}
-						
-						res_str += '</table>'
-						$( '#uzsakymai' ).html ( res_str );
-						
-						$( '.anuliuotas' ).on ( 'click', function() {
-						
-							$( this ).each ( function() {
-								
-								id_uzsakymo = $( this ).parent( ).parent().data ( 'id' );
-
-								keistiBusena ( id_uzsakymo, 'anuliuotas' );
-							});
-						});
-						
-						$( '.ivykdytas' ).on ( 'click', function() {
-						
-							$( this ).each ( function() {
-								
-								id_uzsakymo = $( this ).parent( ).parent().data ( 'id' );
-
-								keistiBusena ( id_uzsakymo, 'ivykdytas' );
-							});
-						});
-						*/
-					}
-			);
-			
-		}
-		/*
-		$( '#naujas_uzsakymas' ).click( function() {
-		
-			alert ( 'vykdomas ' );
-		
-			uzsakymas = {
-				
-				pav: $( '#pav' ).val()
-				, trukme_ruosimo: parseInt ( $( '#trukme_ruosimo' ).val() )
-				, trukme_kaitinimo: parseInt ( $( '#trukme_kaitinimo' ).val() )
+				);
 			}
-			
-			// alert ( 'uzsakymas  ' + uzsakymas.pav + ' ' );
-			
-			params_str = 
-				"pav="  + uzsakymas.pav 
-				+ '&trukme_ruosimo=' + uzsakymas.trukme_ruosimo 
-				+ '&trukme_kaitinimo=' + uzsakymas.trukme_kaitinimo 
-				
-			alert ( "http://localhost:8080/restfull/add?" + params_str );
-				
-			$.ajax(
-				{
-					url: "http://localhost:8080/restfull/add?" + params_str
-				}
-			)
-			.done( function( data ) {
-				
-				alert ( data );
-				pasiimtiUzsakymus();
-			});
-		} );
-		*/
-	});	
-	    </script>
+		});	
+	</script>
 </head>
 <body>
 	<div id="patiekalas">
