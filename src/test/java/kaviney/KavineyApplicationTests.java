@@ -123,7 +123,7 @@ public class KavineyApplicationTests {
 		for ( int i = 0; i < uzsakymai.length; i++ ) {
 			/*
 			System.out.println ( uzsakymai [ i ].toString() );
-			
+			  
 			if ( patiekalai [ i ] != null ) {
 				
 				System.out.println ( patiekalai [ i ].toString() );

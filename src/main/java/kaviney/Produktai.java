@@ -32,6 +32,21 @@ public class Produktai {
     @JsonIgnoreProperties("produktai")
     @OneToMany(mappedBy = "produktai",cascade = CascadeType.ALL)
     private List<Patiekalu_produktai> patiekalu_produktai; 
+    
+    
+    public Produktai() {
+    	
+    }
+    
+    public Produktai(String pav, String mat_vnt, Double mato_kiekis, Double kaina, Double kiekis_sand ) {
+    	
+    	this.pav = pav;
+    	this.mat_vnt = mat_vnt;
+    	this.mato_kiekis = mato_kiekis;
+    	this.kaina = kaina;
+    	this.kiekis_sand = kiekis_sand;
+    }
+    
 
 	public Integer getId() {
 		return id;

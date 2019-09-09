@@ -6,5 +6,7 @@ import kaviney.Produktai;
 
 
 public interface ProduktaiRepository extends CrudRepository<Produktai, Integer> {
+	
+    Produktai findByPav(String pav);	
 
 }
