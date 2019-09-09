@@ -22,20 +22,20 @@ public class ProduktaiRepositoryTest {
     @Test
     public void testSaveProduktaiEmployee() {
 
-        System.out.println (" starting here test ! ");    	
+        																			     // System.out.println (" starting here test ! ");    	
         Produktai produktai = new Produktai("saulegrazos", "g", 111.1, 1.1, 11.1 );
         Produktai produkt = produktaiRepository.save(produktai);
         Produktai prod = produktaiRepository.findByPav("saulegrazos");
-        System.out.println (" kt1 : " + produkt.getId() );        
+        																			     // System.out.println (" kt1 : " + produkt.getId() );        
         assertNotNull(produktai);
-        System.out.println (" kt2 ! ");        
+        																			     // System.out.println (" kt2 ! ");        
         assertNotNull(prod);        
-        System.out.println (" kt3 ! ");        
+        																			     // System.out.println (" kt3 ! ");        
         assertEquals(prod.getPav(), produktai.getPav());
-        System.out.println (" kt4 ! ");   
-        																				// -- neveiks kt4 nespaudina .. 
+        																				 // System.out.println (" kt4 ! ");   
+        																				 // -- neveiks kt4 nespaudina .. 
         assertEquals(prod.getMato_kiekis(), produktai.getMato_kiekis());
-        System.out.println (" kt5 ! ");      
+        																				 // System.out.println (" kt5 ! ");      
         
         produktaiRepository.deleteById(produkt.getId());        					  
         System.out.println (" ending here test ! ");
@@ -48,7 +48,7 @@ public class ProduktaiRepositoryTest {
     
     @Test    
     public void deleteFoundedByName() {
-        System.out.println (" kt6 ! ");       
+        																			// System.out.println (" kt6 ! ");       
         Produktai produktai = new Produktai( "sezamai", "g", 333.3, 3.3, 33.3 );        
 		produktaiRepository.delete(produktai);                  					// -- pagal pavyzdį neveikia  :(  
     }    
