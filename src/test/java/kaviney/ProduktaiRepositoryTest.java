@@ -23,9 +23,9 @@ public class ProduktaiRepositoryTest {
     public void testSaveProduktaiEmployee() {
 
         																			     // System.out.println (" starting here test ! ");    	
-        Produktai produktai = new Produktai("saulegrazos", "g", 111.1, 1.1, 11.1 );
+        Produktai produktai = new Produktai("saulėgražos", "g", 111.1, 1.1, 11.1 );
         Produktai produkt = produktaiRepository.save(produktai);
-        Produktai prod = produktaiRepository.findByPav("saulegrazos");
+        Produktai prod = produktaiRepository.findByPav("saulėgražos");
         																			     // System.out.println (" kt1 : " + produkt.getId() );        
         assertNotNull(produktai);
         																			     // System.out.println (" kt2 ! ");        
