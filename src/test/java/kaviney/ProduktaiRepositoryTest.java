@@ -20,7 +20,7 @@ public class ProduktaiRepositoryTest {
     private ProduktaiRepository produktaiRepository;
    
     @Test
-    public void testSaveProduktaiEmployee() {
+    public void testSaveGetProduktai() {
 
         																			     // System.out.println (" starting here test ! ");    	
         Produktai produktai = new Produktai("saulėgražos", "g", 111.1, 1.1, 11.1 );
