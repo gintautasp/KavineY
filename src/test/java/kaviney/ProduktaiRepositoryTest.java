@@ -3,6 +3,8 @@ package kaviney;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.Optional;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +39,8 @@ public class ProduktaiRepositoryTest {
         assertEquals(prod.getMato_kiekis(), produktai.getMato_kiekis());
         																				 // System.out.println (" kt5 ! ");      
         
-        produktaiRepository.deleteById(produkt.getId());        					  
-        System.out.println (" ending here test ! ");
+        produktaiRepository.deleteById(produkt.getId());				  
+        																		         // System.out.println (" ending here test ! ");
     }
     
     @Test   
@@ -49,15 +51,27 @@ public class ProduktaiRepositoryTest {
     @Test    
     public void deleteFoundedByName() {
         																			// System.out.println (" kt6 ! ");       
-        Produktai produktai = new Produktai( "sezamai", "g", 333.3, 3.3, 33.3 );        
-		produktaiRepository.delete(produktai);                  					// -- pagal pavyzdį neveikia  :(  
+        Produktai produktai = new Produktai( "sezamai", "g", 333.3, 3.3, 33.3 ); 
+        Produktai prod = produktaiRepository.save( produktai );        
+		produktaiRepository.delete( prod );                  					    // -- pagal pavyzdį neveikia  :(  
+        Produktai produkt = produktaiRepository.findByPav("sezamai");
+        assertEquals( produkt, null );		
     }    
 
     @Test
     public void deletByProduktaiIdTest() {
     	
+		Produktai produkt = null;
         Produktai produktai = new Produktai( "moliūgų sėklos", "g", 222.2, 2.2, 22.2);    	
         Produktai prod = produktaiRepository.save(produktai);
-        produktaiRepository.deleteById(prod.getId());
+        Integer id_prod = prod.getId();
+        produktaiRepository.deleteById(id_prod);
+        Optional <Produktai> found = produktaiRepository.findById ( id_prod );
+        
+		if ( found.isPresent() ) {
+			
+			   produkt = found.get();
+		}
+        assertEquals( produkt, null );        
     }   
 }
