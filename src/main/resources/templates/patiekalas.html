@@ -4,6 +4,7 @@
     <title>Patiekalo informacija</title>
     <meta charset="utf-8">
     		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    		<link rel="stylesheet" href="jqueryui.css">		
 		<style>
 			.anuliuotas, .sanuliuotas {
 				background-color: lightblue;
@@ -20,22 +21,6 @@
 			th, td {
 				padding: 6px;
 				border: 1px solid grey;
-			}
-			/*
-				jquery ui stiliai
-			*/
-			label, input { display:block; }
-			input.text { margin-bottom:12px; width:95%; padding: .4em; }
-			fieldset { padding:0; border:0; margin-top:25px; }
-			h1 { font-size: 1.2em; margin: .6em 0; }
-			div#users-contain { width: 350px; margin: 20px 0; }
-			div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
-			div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
-			.ui-dialog .ui-state-error { padding: .3em; }
-			.validateTips { border: 1px solid transparent; padding: 0.3em; }
-			.edit_button, .delete_button, . new_button {
-			
-				display: inline-block;
 			}
 		</style>
 	    <script
@@ -57,7 +42,85 @@
 		
 				id = searchParams.get( 'id' )
 																										// alert ( 'ok, '  + id  );
-				crud_patiekalo_produktu = new crud ( 
+
+				crudPatiekaloProduktu = function(
+				
+					fields
+					, fields_names
+					, url
+					, field_data
+					, fields_ids
+					, id_html_saraso
+					, id_html_dialog_formos
+					, dialog_size_x
+					, dialog_size_y
+					, title_dialog_form
+					, url_save_rec  
+					, url_delete_rec
+					, fields_edit
+					, field_name				
+				
+				) {
+					/*
+					this.fields = fields;
+					this.fields_names = fields_names;
+					this.field_data = field_data;
+					this.fields_ids =fields_ids;
+					this.id_html_saraso = id_html_saraso;
+					this.id_html_dialog_formos = id_html_dialog_formos;
+					this.dialog_size_x = dialog_size_x;
+					this.dialog_size_y = dialog_size_y;
+					this.title_dialog_form =title_dialog_form;
+					this.url_save_rec = url_save_rec;
+					this.field_name = field_name;
+					*/
+					params = {
+					
+						fields: fields
+						, fields_names: fields_names
+						, url : url
+						, field_data: field_data
+						, fields_ids: fields_ids
+						, id_html_saraso: id_html_saraso
+						, id_html_dialog_formos: id_html_dialog_formos
+						, dialog_size_x: dialog_size_x
+						, dialog_size_y: dialog_size_y
+						, title_dialog_form: title_dialog_form
+						, url_save_rec: url_save_rec  
+						, url_delete_rec: url_delete_rec
+						, fields_edit: fields_edit
+						, field_name: field_name
+					}
+					crud.call ( this, params );											// objektu surišimas pagal https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype (OS/eilute 1)
+					
+					this.htmDialogoEditFields = function () {
+					
+						this.params.res_str += 	'<label for="produktu_selectas">Produktas</label>'+
+								'<select type="text" name="id_produkto" id="id_produkto" class="text ui-widget-content ui-corner-all">' +
+									'<option value="1">pirmas</option>' +
+									'<option value="1">pirmas</option>' +
+								'</select>';
+					
+						// this._crud.htmDialogoEditFields (); ! neisprestas reikalas :(
+					}					
+				}
+				
+				crudPatiekaloProduktu.prototype = Object.create( crud.prototype ); // new crud;			// (OS/eilute 2)
+				
+				crudPatiekaloProduktu.prototype.constructor = crudPatiekaloProduktu;				// (OS/eilute 3)
+																				/*
+																				crudPatiekaloProduktu.prototype.htmDialogoEditFields = function () {
+																				
+																					this.params.res_str += 	'<label for="produktu_selectas">Produktas</label>'
+																							'<select type="text" name="id_produkto" id="id_produkto" class="text ui-widget-content ui-corner-all">' +
+																								'<option value="1">pirmas</option>' +
+																								'<option value="1">pirmas</option>' +
+																							'</select>';
+																				
+																					this.prototype.htmDialogoEditFields ();
+																				}
+																				*/																						
+				crud_patiekalo_produktu = new crudPatiekaloProduktu ( 
 					/**
 					* 
 					* pagal struktūra
@@ -100,6 +163,10 @@
 					, [ 'kiekis_produkto' ]
 					, 'produktai.pav'
 				);
+																	// crud_patiekalo_produktu.prototype.this = crud_patiekalo_produktu.this;
+				crud_patiekalo_produktu.initEmpty();
+																	// alert ( JSON.stringify ( crud_patiekalo_produktu ) );
+				crud_patiekalo_produktu.refreshData();
 			}
 		});	
 	</script>
