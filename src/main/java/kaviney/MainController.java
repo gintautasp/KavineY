@@ -111,6 +111,8 @@ public class MainController {
 		String res = "Not done";
 		Patiekalu_produktai n = new Patiekalu_produktai();
 		
+		System.out.println ( "id: " + id + " pat. id: " + id_pat + " prod. id " + id_prod + "kiekis prod.: " + kiekis_produkto );
+		
 		if (id > 0) {
 		
 			Optional <Patiekalu_produktai> found = patiekalu_produktaiRepository.findById( id );
@@ -133,7 +135,8 @@ public class MainController {
 			}
 		}
 		n.setKiekis_produkto ( kiekis_produkto );
-			   			   
+		
+		System.out.println ( n.toString() );			   			   
 		patiekalu_produktaiRepository.save(n);	
 		res = "Saved";
 	    

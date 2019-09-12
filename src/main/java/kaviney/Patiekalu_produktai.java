@@ -15,19 +15,20 @@ public class Patiekalu_produktai implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)	
 	private Integer id;
     
-    @Column(insertable=false, updatable=false)
+
     private Integer patiekalai_id;
-   
-    @Column(insertable=false, updatable=false)    
+      
     private Integer produktai_id;
 
     private Double kiekis_produkto;	
     
     @ManyToOne
+    @JoinColumn(insertable=false, updatable=false)
     private Patiekalai patiekalai;
 
     @JsonIgnoreProperties("patiekalu_produktai")
     @ManyToOne
+    @JoinColumn(insertable=false, updatable=false)
     private Produktai produktai; 
     
     public Patiekalu_produktai() {
@@ -89,7 +90,12 @@ public class Patiekalu_produktai implements Serializable {
     public Integer getPatieklai_id () {
     	
     	return this.patiekalai_id;
-    }    
+    } 
+    
+	public String toString() {
+		
+		return "id: " + this.id + " patiekalai id: " + this.patiekalai_id + " produktai id " + this.produktai_id + "kiekis prod.: " + this.kiekis_produkto;
+	}    
 }
 
 

@@ -45,5 +45,7 @@ ALTER TABLE `uzsakymai`
 */
 	
 UPDATE `patiekalai` SET `kaina`=`trukme_ruosimo`+`trukme_kaitinimo`+`id`;
+
+ALTER TABLE `patiekalu_produktai` CHANGE `patiekalai_id` `patiekalai_id` INT(10) UNSIGNED NULL DEFAULT NULL, CHANGE `produktai_id` `produktai_id` INT(10) UNSIGNED NULL DEFAULT NULL;
 	
 	

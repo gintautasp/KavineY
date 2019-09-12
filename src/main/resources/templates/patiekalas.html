@@ -42,7 +42,6 @@
 		
 				id = searchParams.get( 'id' )
 																										// alert ( 'ok, '  + id  );
-
 				crudPatiekaloProduktu = function(
 				
 					fields
@@ -91,35 +90,57 @@
 						, fields_edit: fields_edit
 						, field_name: field_name
 					}
-					crud.call ( this, params );											// objektu surišimas pagal https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype (OS/eilute 1)
+					crud.call ( this, params );	// objektu surišimas pagal https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype                (OS/eilute 1)  ..
 					
-					this.htmDialogoEditFields = function () {
+					this.produktai = [];
 					
-						this.params.res_str += 	'<label for="produktu_selectas">Produktas</label>'+
-								'<select type="text" name="id_produkto" id="id_produkto" class="text ui-widget-content ui-corner-all">' +
-									'<option value="1">pirmas</option>' +
-									'<option value="1">pirmas</option>' +
-								'</select>';
+					this.getProduktai = function() {
 					
-						// this._crud.htmDialogoEditFields (); ! neisprestas reikalas :(
-					}					
+						alert( 'run getProduktai' );
+						
+						var i_am = this;
+						
+						$.ajax({
+								url: "http://localhost:8080/restfull/lst-produktai" 
+						}).done(
+						
+							function( data ) {
+							
+								i_am.produktai = data;
+								i_am.initEmpty();
+								i_am.refreshData();
+							}
+						);
+					}
 				}
 				
 				crudPatiekaloProduktu.prototype = Object.create( crud.prototype ); // new crud;			// (OS/eilute 2)
 				
 				crudPatiekaloProduktu.prototype.constructor = crudPatiekaloProduktu;				// (OS/eilute 3)
-																				/*
-																				crudPatiekaloProduktu.prototype.htmDialogoEditFields = function () {
 																				
-																					this.params.res_str += 	'<label for="produktu_selectas">Produktas</label>'
-																							'<select type="text" name="id_produkto" id="id_produkto" class="text ui-widget-content ui-corner-all">' +
-																								'<option value="1">pirmas</option>' +
-																								'<option value="1">pirmas</option>' +
-																							'</select>';
+				crudPatiekaloProduktu.prototype.htmDialogoEditFields = function ( i_am ) {			//  .. ir paveldejimas ir polimorfizmas pagal https://toranbillups.com/blog/archive/2013/05/15/Basic-javascript-inheritance-and-polymorphism/
+				
+																				// this.getProduktai();
+					options = '';
+
+					alert ( 'kiek produktu: ' + this.produktai.length );
+					
+					for ( i= 0; i < this.produktai.length; i++ ) {
+																				//alert ( 'i, id, pav:' + i + ',' + this.produktai [ i ].id + ', ' + this.produktai [ i ].pav )
+
+						options += '<option value="' + this.produktai [ i ].id + '">' + this.produktai [ i ].pav + '</option>';
+
+					}
+																				// alert( options );
+				
+					i_am.params.res_str += 	'<label for="produktu_selectas">Produktas</label>' +
+							'<select type="text" name="id_prod" id="id_prod" class="text ui-widget-content ui-corner-all">' +
+								options +
+							'</select>';
+				
+					crud.prototype.htmDialogoEditFields ( i_am );
+				}
 																				
-																					this.prototype.htmDialogoEditFields ();
-																				}
-																				*/																						
 				crud_patiekalo_produktu = new crudPatiekaloProduktu ( 
 					/**
 					* 
@@ -160,13 +181,11 @@
 					, 'Ingradientas'
 					,  'http://localhost:8080/restfull/patiekalo-produktas?id_pat=' + id
 					,  'http://localhost:8080/restfull/salinti-produkta?id_pat=' + id
-					, [ 'kiekis_produkto' ]
+					, [ 'id_prod', 'kiekis_produkto' ]
 					, 'produktai.pav'
 				);
-																	// crud_patiekalo_produktu.prototype.this = crud_patiekalo_produktu.this;
-				crud_patiekalo_produktu.initEmpty();
-																	// alert ( JSON.stringify ( crud_patiekalo_produktu ) );
-				crud_patiekalo_produktu.refreshData();
+
+				crud_patiekalo_produktu.getProduktai();
 			}
 		});	
 	</script>
