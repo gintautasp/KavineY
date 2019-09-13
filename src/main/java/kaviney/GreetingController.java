@@ -36,6 +36,12 @@ public class GreetingController {
         return "patiekalai";
     }  
     
+    @GetMapping("/tiekejai")
+    public String tiekejai() {
+
+        return "tiekajai";
+    }     
+    
     @GetMapping("/patiekalas")
     public String patiekalas(@RequestParam Integer id) {
 

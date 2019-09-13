@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Patiekalo informacija</title>
+    <meta charset="utf-8">
+    		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    		<link rel="stylesheet" href="jqueryui.css">		
+		<style>
+			.anuliuotas, .sanuliuotas {
+				background-color: lightblue;
+			}
+			.ivykdytas, .sivykdytas {
+				background-color: lightgreen;
+			}
+			table {
+				border-collapse: colapse;
+			}
+			th {
+				background-color: lightgreen;			
+			}
+			th, td {
+				padding: 6px;
+				border: 1px solid grey;
+			}
+		</style>
+	    <script
+		src="https://code.jquery.com/jquery-3.4.1.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+		crossorigin="anonymous">
+	    </script>
+	    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>	    
+	    <script src="crud.js"></script>
+	    <script>
+		$( document ).ready ( function() {
+
+			params = {
+			
+				fields: [ 'pav', 'adresas', 'kontaktai' ]
+				, fields_names: [ 'tiekėjas', 'adresas', 'kontaktai' ]
+				, url : 'http://localhost:8080/restfull/lst-tiekejai'
+				, field_data: ''
+				, fields_ids: [ 'pav', 'adresas', 'kontaktai' ]
+				, id_html_saraso: 'tiekejai'
+				, id_html_dialog_formos: ''
+				, dialog_size_x: 300
+				, dialog_size_y: 340
+				, title_dialog_form: 'Tiekėjas'
+				, url_save_rec: 'http://localhost:8080/restfull/saugoti-tiekeja'
+				, url_delete_rec:  'http://localhost:8080/restfull/salinti-tiekeja'
+				, fields_edit:  [ 'pav', 'adresas', 'kontaktai' ]
+				, field_name: 'pav'
+			}
+			
+			crud_tiekeju = new crud ( params );
+			
+			crud_tiekeju.initEmpty();
+			crud_tiekeju.refreshData();
+			
+		});			
+	</script>
+</head>
+<body>
+	<div id="tiekejai">
+	</div>
+</body>
+</html>

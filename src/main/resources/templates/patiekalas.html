@@ -60,19 +60,6 @@
 					, field_name				
 				
 				) {
-					/*
-					this.fields = fields;
-					this.fields_names = fields_names;
-					this.field_data = field_data;
-					this.fields_ids =fields_ids;
-					this.id_html_saraso = id_html_saraso;
-					this.id_html_dialog_formos = id_html_dialog_formos;
-					this.dialog_size_x = dialog_size_x;
-					this.dialog_size_y = dialog_size_y;
-					this.title_dialog_form =title_dialog_form;
-					this.url_save_rec = url_save_rec;
-					this.field_name = field_name;
-					*/
 					params = {
 					
 						fields: fields
@@ -118,12 +105,12 @@
 				
 				crudPatiekaloProduktu.prototype.constructor = crudPatiekaloProduktu;				// (OS/eilute 3)
 																				
-				crudPatiekaloProduktu.prototype.htmDialogoEditFields = function ( i_am ) {			//  .. ir paveldejimas ir polimorfizmas pagal https://toranbillups.com/blog/archive/2013/05/15/Basic-javascript-inheritance-and-polymorphism/
+				crudPatiekaloProduktu.prototype.htmDialogoEditFields = function ( i_am, fields_ignore ) {			//  .. ir paveldejimas ir polimorfizmas pagal https://toranbillups.com/blog/archive/2013/05/15/Basic-javascript-inheritance-and-polymorphism/
 				
 																				// this.getProduktai();
 					options = '';
 
-					alert ( 'kiek produktu: ' + this.produktai.length );
+																				// alert ( 'kiek produktu: ' + this.produktai.length );
 					
 					for ( i= 0; i < this.produktai.length; i++ ) {
 																				//alert ( 'i, id, pav:' + i + ',' + this.produktai [ i ].id + ', ' + this.produktai [ i ].pav )
@@ -133,12 +120,26 @@
 					}
 																				// alert( options );
 				
-					i_am.params.res_str += 	'<label for="produktu_selectas">Produktas</label>' +
+					i_am.params.res_str += 	'<div id="produktu_selectas"><label for="id_prod">Produktas</label>' +
 							'<select type="text" name="id_prod" id="id_prod" class="text ui-widget-content ui-corner-all">' +
 								options +
-							'</select>';
+							'</select></div>';
 				
-					crud.prototype.htmDialogoEditFields ( i_am );
+					crud.prototype.htmDialogoEditFields ( i_am, [ 'id_prod' ] );
+				}
+				
+				crudPatiekaloProduktu.prototype.editClick = function( this_button, i_am ) {
+				
+					crud.prototype.editClick ( this_button, i_am );
+					$( '#produktu_selectas' ).hide();
+					alert( 'bla produktu_selectas x' );					
+				}
+				
+				crudPatiekaloProduktu.prototype.naujasClick = function ( i_am ) {	
+				
+					crud.prototype.naujasClick ( i_am );
+					$( '#produktu_selectas' ).show();
+					alert( 'bla produktu_selectas x3' );					
 				}
 																				
 				crud_patiekalo_produktu = new crudPatiekaloProduktu ( 

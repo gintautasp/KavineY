@@ -34,10 +34,12 @@
 		this.params.o_ed_fields = [];
 
 		this.params.dialog = null;
-		this.params.form = null;		
+		this.params.form = null;			
 		
 		
 		this.params.allFields = $( [] );
+		
+		this.params.confirm = null;
 		
 		this.params.data = {};
 																																	// alert ( 'url: ' + url );
@@ -76,9 +78,9 @@
 		this.params.res_str = '<table>';			
 		
 		this.sarasoAntraste();
-																													alert ( 'this.params.data 2 ' + JSON.stringify ( this.params.data ) );	
+																														// alert ( 'this.params.data 2 ' + JSON.stringify ( this.params.data ) );	
 		num_produktu = eval ( 'this.params.data' + this.params.field_data + '.length' );
-																													alert ( 'num_produktu:' +  num_produktu );
+																														// alert ( 'num_produktu:' +  num_produktu );
 		for ( i = 0; i < num_produktu; i++) {
 																																				// alert ( i );
 			this.params.res_str += '<tr data-id="' + eval ( 'this.params.data' +this.params.field_data + '[ i ].id' ) +'" ><td>' + i + '</td>';
@@ -96,41 +98,80 @@
 
 			this.htmlDialogo();
 			this.params.id_html_dialog_formos = 'dialogo_forma';
-		}
+		}  
+		this.htmlPatvirtinimo();
 
 		$( '#' + this.params.id_html_saraso ).html( this.params.res_str );
 		this.initDialog();
 		this.edFields();
 		
-		$( "#naujas" ).button().on( "click", function() {
+		this.initConfirm();
+		
+		$( "#naujas_button" ).on( "click", function() {
 			
-			$( '#name_item' ).html ( 'Naujas ' + i_am.params.title_dialog_form );
-			
-			$( '#id_rec' ).val(  '0' );
-			
-			i_am.params.dialog.dialog( "open" );
+			i_am.naujasClick ( i_am );
 		});				
 		
 		$( '.edit_button' ).on ( 'click', function() {
 			
-			id_record = $( this ).parent().parent().data ( 'id' );
+			i_am.editClick( this, i_am );
+		});
+		
+		$( '.delete_button' ).on ( 'click', function() {
 			
-			i_record = i_am.surastiSarasePagalId ( id_record );
-			
-			for ( k=0; k < i_am.params.fields.length; k++ ) {
-				
-				field_val = eval (  'i_am.params.data' + i_am.params.field_data + '[ i_record ].' + i_am.params.fields [ k ] );
-				
-																														// alert (  i_am.params.fields [ k ]  + ': ' + field_val );
-				$( '#' +  i_am.params.fields_ids [ k ] ).val ( field_val );
-			}
-			
-			$( '#name_item' ).html ( eval (  'i_am.params.data' + i_am.params.field_data + '[ i_record ].' + i_am.params.field_name ) );
-			
-			$( '#id_rec' ).val ( id_record );
-			i_am.params.dialog.dialog( "open" );				
+			i_am.deleteClick( this, i_am );
 		});
 	}
+	
+	crud.prototype.naujasClick = function ( i_am ) {
+	
+		$( '#name_item' ).html ( 'Naujas ' + i_am.params.title_dialog_form );
+		
+		$( '#id_rec' ).val(  '0' );
+		
+		i_am.params.dialog.dialog( "open" );		
+	}
+	
+	crud.prototype.editClick = function( this_button, i_am ) {
+
+		id_record = $( this_button ).parent().parent().data ( 'id' );
+		
+		i_record = i_am.surastiSarasePagalId ( id_record );
+		
+		for ( k=0; k < i_am.params.fields.length; k++ ) {
+			
+			field_val = eval (  'i_am.params.data' + i_am.params.field_data + '[ i_record ].' + i_am.params.fields [ k ] );
+			
+																													// alert (  i_am.params.fields [ k ]  + ': ' + field_val );
+			$( '#' +  i_am.params.fields_ids [ k ] ).val ( field_val );
+		}
+		
+		$( '#name_item' ).html ( eval (  'i_am.params.data' + i_am.params.field_data + '[ i_record ].' + i_am.params.field_name ) );
+		
+		$( '#id_rec' ).val ( id_record );
+		i_am.params.dialog.dialog( "open" );
+	}
+	
+	crud.prototype.deleteClick = function( this_button, i_am ) {
+
+		id_record = $( this_button ).parent().parent().data ( 'id' );
+		
+		i_record = i_am.surastiSarasePagalId ( id_record );
+		
+		for ( k=0; k < i_am.params.fields.length; k++ ) {
+			
+			field_val = eval (  'i_am.params.data' + i_am.params.field_data + '[ i_record ].' + i_am.params.fields [ k ] );
+			
+																													// alert (  i_am.params.fields [ k ]  + ': ' + field_val );
+			$( '#del_' +  i_am.params.fields_ids [ k ] ).html ( field_val );
+		}
+		
+		$( '#name_item' ).html ( eval (  'i_am.params.data' + i_am.params.field_data + '[ i_record ].' + i_am.params.field_name ) );
+		
+		$( '#id_del_rec' ).val ( id_record );
+		i_am.params.confirm.dialog( "open" );
+	}	
+	
 		 
 	crud.prototype.sarasoAntraste= function() {
 			
@@ -144,7 +185,7 @@
 		this.params.res_str += 
 		
 			'<th>veiksmai ' +									
-				'<input type="button" class="new_button" value="naujas" id="naujas"></th>' +
+				'<input type="button" class="new_button" value="naujas" id="naujas_button"></th>' +
 			'</tr>';
 																												// alert ( this.params.res_str );
 	}
@@ -174,7 +215,7 @@
 				'<fieldset>'
 		;
 
-		this.htmDialogoEditFields( this );
+		this.htmDialogoEditFields( this, [] );
 
 		this.params.res_str += 			
 		
@@ -185,16 +226,43 @@
 			'</form>' +
 			'</div>'
 		;
-																														// console.log ( this.params.res_str );
+																											// console.log ( this.params.res_str );
 	}
+	
+	crud.prototype.htmlPatvirtinimo = function () {
 		
-	crud.prototype.htmDialogoEditFields = function( i_am ) {
+		this.params.res_str +=		
+	
+			'<div id="dialog-confirm" title="Irašo šalinimas">' +
+				'<p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>Ar tikrai norite pašalinti šį įrašą?</p>' +
+		
+					'<input type="hidden" name="id" id="id_del_rec" value="0">';
+		
+		this.htmlPatvirtinimoInfoFields ( this );
+		
+		this.params.res_str += '</div>'
+	}
+	
+	crud.prototype.htmlPatvirtinimoInfoFields  = function ( i_am ) {
 		
 		for ( k=0; k < i_am.params.fields.length; k++ ) {
+																																	// alert (i_am.params.fields_ids [ k ] + ':' + fields_ignore.indexOf ( i_am.params.fields_ids [ k ] ) );
+			// if ( ( i_am.params.ed_fields.length > 0 ) && ( i_am.params.ed_fields.indexOf ( i_am.params.fields_ids [ k ] ) > -1 ) && (  fields_ignore.indexOf ( i_am.params.fields_ids [ k ] ) == -1 ) ) {
 			
+			i_am.params.res_str += 
 			
-			if ( ( i_am.params.ed_fields.length > 0 ) && ( i_am.params.ed_fields.indexOf ( i_am.params.fields_ids [ k ] ) > -1 ) ) {
-			
+				'<label>' + i_am.params.fields_names [ k ].replace( '-<br>', '' ).replace ( '<br>', ' ' ).replace( '_', '' ) + '</label>' +
+					'<span id="del_' + i_am.params.fields_ids [ k ] + '" class="text ui-widget-content ui-corner-all"></span>'
+			;
+			// }
+		}
+	}
+		
+	crud.prototype.htmDialogoEditFields = function( i_am, fields_ignore ) {
+		
+		for ( k=0; k < i_am.params.fields.length; k++ ) {
+																																	// alert (i_am.params.fields_ids [ k ] + ':' + fields_ignore.indexOf ( i_am.params.fields_ids [ k ] ) );
+			if ( ( i_am.params.ed_fields.length > 0 ) && ( i_am.params.ed_fields.indexOf ( i_am.params.fields_ids [ k ] ) > -1 ) && (  fields_ignore.indexOf ( i_am.params.fields_ids [ k ] ) == -1 ) ) {
 			
 				i_am.params.res_str += 
 				
@@ -239,8 +307,8 @@
 		
 			params_str = '&';
 		}			
-	
-		params_str += 'id=' + id;  
+
+		params_str += 'id=' + id;  	
 		
 		for ( k=0; k < i_am.params.ed_fields.length; k++ ) {
 			
@@ -269,7 +337,7 @@
 		
 	crud.prototype.initDialog = function() {
 			
-		alert ( this.params.id_html_dialog_formos  );
+																																	// alert ( this.params.id_html_dialog_formos  );
 		var i_am = this;
 		
 		this.params.dialog = $( '#' + this.params.id_html_dialog_formos ).dialog({
@@ -299,3 +367,55 @@
 		 
 		this.params.form = this.params.dialog.find( 'form' );
 	}
+	
+	crud.prototype.initConfirm = function() {
+		
+		var i_am = this;
+		
+		this.params.confirm = $( "#dialog-confirm" ).dialog({
+
+			autoOpen: false,			
+			resizable: false,
+			height: "auto",
+			width: 400,
+			modal: true,
+			buttons: {
+			      
+				"Šalinti": function() {
+				
+					i_am.deleteRecord( i_am );
+				},
+				"Atšaukti": function() {
+				
+					$( this ).dialog( "close" );
+				} 
+			}
+		});		
+	}
+	
+	crud.prototype.deleteRecord = function( i_am, id ) {
+			
+		params_str = '?';
+		
+		if ( i_am.params.url_save_rec.indexOf ( '?' ) > -1 ) {
+		
+			params_str = '&';
+		}	
+
+		id  = $( '#id_del_rec' ).val();	
+		alert ( 'id_del: ' +  id );		
+		
+		params_str += 'id=' + id;			
+																																	//alert (  'saving'  + i_am.params.url_save_rec + params_str );
+		$.ajax(
+			{
+				url: i_am.params.url_delete_rec + params_str
+			}
+		)
+		.done( function( data ) {
+			
+																																	// alert ( data );
+			i_am.params.confirm.dialog ( 'close' );
+			i_am.refreshData(); 																											// paimtiProduktus();
+		});
+	}	
