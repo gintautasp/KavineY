@@ -34,8 +34,8 @@
 		this.params.o_ed_fields = [];
 
 		this.params.dialog = null;
-		this.params.form = null;			
 		
+		this.params.form = null;			
 		
 		this.params.allFields = $( [] );
 		
@@ -44,6 +44,20 @@
 		this.params.data = {};
 																																	// alert ( 'url: ' + url );
 		this.params.res_str = '';
+	}
+	
+	crud.prototype.resetDialogs = function() {
+		/*
+		if ( this.params.hasOwnProperty ( 'dialog' ) && ( this.params.dialog != null ) ) {
+		
+			this.params.dialog.dialog( 'destroy' );
+		}	
+		*/
+		if ( this.params.hasOwnProperty ( 'confirm' ) && ( this.params.confirm != null ) ) {
+		
+			this.params.confirm.dialog( 'destroy' );
+		}
+		
 	}
 
 	//	this.initEmpty();
@@ -100,12 +114,22 @@
 			this.params.id_html_dialog_formos = 'dialogo_forma';
 		}  
 		this.htmlPatvirtinimo();
+		
+		this.resetDialogs();
+		
+		$( '#' + this.params.id_html_saraso ).html( '' );
 
 		$( '#' + this.params.id_html_saraso ).html( this.params.res_str );
+		
+		
+		
 		this.initDialog();
 		this.edFields();
 		
-		this.initConfirm();
+		// if (  ! params.hasOwnProperty ( 'confirm' ) || ( params.this == null ) ) {
+		
+			this.initConfirm();
+		// }
 		
 		$( "#naujas_button" ).on( "click", function() {
 			
@@ -162,8 +186,9 @@
 			
 			field_val = eval (  'i_am.params.data' + i_am.params.field_data + '[ i_record ].' + i_am.params.fields [ k ] );
 			
-																													// alert (  i_am.params.fields [ k ]  + ': ' + field_val );
+																													alert (  i_am.params.fields [ k ] + ' (' + i_am.params.fields_ids [ k ]  + ') : ' + field_val );
 			$( '#del_' +  i_am.params.fields_ids [ k ] ).html ( field_val );
+																													alert ( $( '#del_' +  i_am.params.fields_ids [ k ] ).html() );
 		}
 		
 		$( '#name_item' ).html ( eval (  'i_am.params.data' + i_am.params.field_data + '[ i_record ].' + i_am.params.field_name ) );
@@ -233,7 +258,7 @@
 		
 		this.params.res_str +=		
 	
-			'<div id="dialog-confirm" title="Irašo šalinimas">' +
+			'<div id="salinimo_tvirtinimas" title="Irašo šalinimas">' +
 				'<p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>Ar tikrai norite pašalinti šį įrašą?</p>' +
 		
 					'<input type="hidden" name="id" id="id_del_rec" value="0">';
@@ -372,7 +397,7 @@
 		
 		var i_am = this;
 		
-		this.params.confirm = $( "#dialog-confirm" ).dialog({
+		this.params.confirm = $( "#salinimo_tvirtinimas" ).dialog({
 
 			autoOpen: false,			
 			resizable: false,
@@ -403,7 +428,7 @@
 		}	
 
 		id  = $( '#id_del_rec' ).val();	
-		alert ( 'id_del: ' +  id );		
+																																	// alert ( 'id_del: ' +  id );		
 		
 		params_str += 'id=' + id;			
 																																	//alert (  'saving'  + i_am.params.url_save_rec + params_str );

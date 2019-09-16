@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Patiekalo informacija</title>
+    <title>Tiekėjai</title>
     <meta charset="utf-8">
     		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     		<link rel="stylesheet" href="jqueryui.css">		
@@ -83,8 +83,7 @@
 					
 					this.getProduktai = function() {
 					
-						alert( 'run getProduktai' );
-						
+																				// alert( 'run getProduktai' );
 						var i_am = this;
 						
 						$.ajax({
@@ -109,9 +108,7 @@
 				
 																				// this.getProduktai();
 					options = '';
-
 																				// alert ( 'kiek produktu: ' + this.produktai.length );
-					
 					for ( i= 0; i < this.produktai.length; i++ ) {
 																				//alert ( 'i, id, pav:' + i + ',' + this.produktai [ i ].id + ', ' + this.produktai [ i ].pav )
 
@@ -132,14 +129,14 @@
 				
 					crud.prototype.editClick ( this_button, i_am );
 					$( '#produktu_selectas' ).hide();
-					alert( 'bla produktu_selectas x' );					
+																																		// alert( 'bla produktu_selectas x' );					
 				}
 				
 				crudPatiekaloProduktu.prototype.naujasClick = function ( i_am ) {	
 				
 					crud.prototype.naujasClick ( i_am );
 					$( '#produktu_selectas' ).show();
-					alert( 'bla produktu_selectas x3' );					
+																																		// alert( 'bla produktu_selectas x3' );					
 				}
 																				
 				crud_patiekalo_produktu = new crudPatiekaloProduktu ( 
