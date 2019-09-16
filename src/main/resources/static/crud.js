@@ -13,7 +13,6 @@
 		this.params.fields_names = params.fields_names;
 		this.params.url = params.url;
 		this.params.field_data = params.field_data;
-		this.params.fields_ids = params.fields_ids;
 		this.params.id_html_saraso = params.id_html_saraso;
 		this.params.id_html_dialog_formos = params.id_html_dialog_formos;
 		this.params.dialog_size_x = params.dialog_size_x;
@@ -167,7 +166,7 @@
 			field_val = eval (  'i_am.params.data' + i_am.params.field_data + '[ i_record ].' + i_am.params.fields [ k ] );
 			
 																													// alert (  i_am.params.fields [ k ]  + ': ' + field_val );
-			$( '#' +  i_am.params.fields_ids [ k ] ).val ( field_val );
+			$( '#' +  i_am.params.fields[ k ] ).val ( field_val );
 		}
 		
 		$( '#name_item' ).html ( eval (  'i_am.params.data' + i_am.params.field_data + '[ i_record ].' + i_am.params.field_name ) );
@@ -185,13 +184,12 @@
 		for ( k=0; k < i_am.params.fields.length; k++ ) {
 			
 			field_val = eval (  'i_am.params.data' + i_am.params.field_data + '[ i_record ].' + i_am.params.fields [ k ] );
-			
-																													alert (  i_am.params.fields [ k ] + ' (' + i_am.params.fields_ids [ k ]  + ') : ' + field_val );
-			$( '#del_' +  i_am.params.fields_ids [ k ] ).html ( field_val );
-																													alert ( $( '#del_' +  i_am.params.fields_ids [ k ] ).html() );
+																													// alert (  i_am.params.fields [ k ] + ' (' + i_am.params.fields[ k ]  + ') : ' + field_val );
+			$( '#del_' +  i_am.params.fields[ k ] ).html ( field_val );
+																													// alert ( $( '#del_' +  i_am.params.fields[ k ] ).html() );
 		}
 		
-		$( '#name_item' ).html ( eval (  'i_am.params.data' + i_am.params.field_data + '[ i_record ].' + i_am.params.field_name ) );
+		$( '#del_name_item' ).html ( eval (  'i_am.params.data' + i_am.params.field_data + '[ i_record ].' + i_am.params.field_name ) );
 		
 		$( '#id_del_rec' ).val ( id_record );
 		i_am.params.confirm.dialog( "open" );
@@ -240,7 +238,7 @@
 				'<fieldset>'
 		;
 
-		this.htmDialogoEditFields( this, [] );
+		this.htmDialogoEditFields( this );
 
 		this.params.res_str += 			
 		
@@ -260,7 +258,7 @@
 	
 			'<div id="salinimo_tvirtinimas" title="Irašo šalinimas">' +
 				'<p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>Ar tikrai norite pašalinti šį įrašą?</p>' +
-		
+				        '<span id="del_name_item"></span>' +
 					'<input type="hidden" name="id" id="id_del_rec" value="0">';
 		
 		this.htmlPatvirtinimoInfoFields ( this );
@@ -271,29 +269,27 @@
 	crud.prototype.htmlPatvirtinimoInfoFields  = function ( i_am ) {
 		
 		for ( k=0; k < i_am.params.fields.length; k++ ) {
-																																	// alert (i_am.params.fields_ids [ k ] + ':' + fields_ignore.indexOf ( i_am.params.fields_ids [ k ] ) );
-			// if ( ( i_am.params.ed_fields.length > 0 ) && ( i_am.params.ed_fields.indexOf ( i_am.params.fields_ids [ k ] ) > -1 ) && (  fields_ignore.indexOf ( i_am.params.fields_ids [ k ] ) == -1 ) ) {
+																																	// alert (i_am.params.fields[ k ] + ':' + fields_ignore.indexOf ( i_am.params.fields[ k ] ) );
+			if ( ( i_am.params.ed_fields.length > 0 ) && ( i_am.params.ed_fields.indexOf ( i_am.params.fields[ k ] ) > -1 ) ) {
 			
 			i_am.params.res_str += 
 			
 				'<label>' + i_am.params.fields_names [ k ].replace( '-<br>', '' ).replace ( '<br>', ' ' ).replace( '_', '' ) + '</label>' +
-					'<span id="del_' + i_am.params.fields_ids [ k ] + '" class="text ui-widget-content ui-corner-all"></span>'
-			;
-			// }
+					'<span id="del_' + i_am.params.fields[ k ] + '" class="text ui-widget-content ui-corner-all"></span>';
+			}
 		}
 	}
 		
-	crud.prototype.htmDialogoEditFields = function( i_am, fields_ignore ) {
+	crud.prototype.htmDialogoEditFields = function( i_am ) {
 		
 		for ( k=0; k < i_am.params.fields.length; k++ ) {
-																																	// alert (i_am.params.fields_ids [ k ] + ':' + fields_ignore.indexOf ( i_am.params.fields_ids [ k ] ) );
-			if ( ( i_am.params.ed_fields.length > 0 ) && ( i_am.params.ed_fields.indexOf ( i_am.params.fields_ids [ k ] ) > -1 ) && (  fields_ignore.indexOf ( i_am.params.fields_ids [ k ] ) == -1 ) ) {
+																																	// alert (i_am.params.fields[ k ] + ':' + fields_ignore.indexOf ( i_am.params.fields[ k ] ) );
+			if ( ( i_am.params.ed_fields.length > 0 ) && ( i_am.params.ed_fields.indexOf ( i_am.params.fields[ k ] ) > -1 ) ) {
 			
 				i_am.params.res_str += 
 				
-					'<label for="' + i_am.params.fields_ids [ k ] + '">' + i_am.params.fields_names [ k ].replace( '-<br>', '' ).replace ( '<br>', ' ' ).replace( '_', '' ) + '</label>' +
-						'<input type="text" name="' + i_am.params.fields_ids [ k ] + '" id="' + i_am.params.fields_ids [ k ] + '" value="" class="text ui-widget-content ui-corner-all">'
-				;
+					'<label for="' + i_am.params.fields[ k ] + '">' + i_am.params.fields_names [ k ].replace( '-<br>', '' ).replace ( '<br>', ' ' ).replace( '_', '' ) + '</label>' +
+						'<input type="text" name="' + i_am.params.fields[ k ] + '" id="' + i_am.params.fields[ k ] + '" value="" class="text ui-widget-content ui-corner-all">';
 			}
 		}		
 	}
@@ -316,7 +312,7 @@
 		
 		for ( k=0; k < this.params.fields.length; k++ ) {
 			
-			if ( ( this.params.ed_fields.length > 0 ) && ( this.params.ed_fields.indexOf ( this.params.fields_ids [ k ] ) > -1 ) ) {
+			if ( ( this.params.ed_fields.length > 0 ) && ( this.params.ed_fields.indexOf ( this.params.fields[ k ] ) > -1 ) ) {
 
 				this.params.o_ed_fields.push ( $ ( '#' + this.params.fields [ k ] ) );
 				this.params.allFields.add( this.params.o_ed_fields [ k ]  );
@@ -339,7 +335,7 @@
 			
 			params_str += '&' + i_am.params.ed_fields [ k ] + '=' + $( '#' + i_am.params.ed_fields [ k ] ).val();
 		}
-																																alert (  'saving'  + i_am.params.url_save_rec + params_str );
+																																// alert (  'saving'  + i_am.params.url_save_rec + params_str );
 			
 		$.ajax(
 			{
