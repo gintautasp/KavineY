@@ -79,7 +79,7 @@ public class MainController {
 		
 		Optional <Uzsakymai> found = uzsakymaiRepository.findById( id );
 		
-		// variantas trynimuiui
+		// variantas trynimui
 		// uzsakymaiRepository.deleteById(id);
 		
 		String res = "Not done";
