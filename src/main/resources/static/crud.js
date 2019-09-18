@@ -103,6 +103,8 @@
 				this.params.res_str += '<td>'+ eval (  'this.params.data' + this.params.field_data +'[ i ].' + this.params.fields [ k ] ) + '</td>';
 			}
 			
+			this.params.res_str += this.addColumns();
+			
 			 this.params.res_str += '<td><input type="button" class="edit_button" value="redaguoti"><input  type="button" class="delete_button" value="šalinti"></td></tr>';
 		} 
 		this.params.res_str += '</table>';
@@ -207,7 +209,9 @@
 		}
 		this.params.res_str += 
 		
-			'<th>veiksmai ' +									
+			this.addHeadColumns()
+		
+			+ '<th>veiksmai ' +									
 				'<input type="button" class="new_button" value="naujas" id="naujas_button"></th>' +
 			'</tr>';
 																												// alert ( this.params.res_str );
@@ -439,4 +443,14 @@
 			i_am.params.confirm.dialog ( 'close' );
 			i_am.refreshData(); 																											// paimtiProduktus();
 		});
+	}	
+	
+	crud.prototype.addColumns = function() {
+		
+		return '';
+	}
+	
+	crud.prototype.addHeadColumns = function() {
+		
+		return '';
 	}	

@@ -138,6 +138,16 @@
 					$( '#produktu_selectas' ).show();
 																																		// alert( 'bla produktu_selectas x3' );					
 				}
+				
+				crudPatiekaloProduktu.prototype.addColumns = function () {
+				
+					return '<td>bla bla</td>';
+				}
+				
+				crudPatiekaloProduktu.prototype.addHeadColumns = function () {
+				
+					return '<th>Bla</th>';
+				}				
 																				
 				crud_patiekalo_produktu = new crudPatiekaloProduktu ( 
 					/**
