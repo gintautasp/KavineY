@@ -13,18 +13,25 @@ import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import org.hibernate.cfg.Configuration;
+
 
 import kaviney.Uzsakymai;
 import kaviney.UzsakymaiRepository;
 
 import kaviney.Patiekalai;
 import kaviney.PatiekalaiRepository;
-
+/*
 import kaviney.TopPatiekalai;
 import kaviney.TopPatiekalaiAtaskaita;
-
+*/
 import kavinex.*;
-
+/*
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.*;
+import java.util.List;
+*/
 @Controller    // This means that this class is a Controller
 @RequestMapping(path="/restfull") // This means URL's start with /demo (after Application path)
 public class MainController {
@@ -44,7 +51,7 @@ public class MainController {
 	private ProduktaiRepository produktaiRepository;	
 	
 	@Autowired
-	private Patiekalu_produktaiRepository patiekalu_produktaiRepository; 
+	private Patiekalu_produktaiRepository patiekalu_produktaiRepository; 	
 	
 	@GetMapping(path="/add") // Map ONLY GET Requests
 	public @ResponseBody String naujasUzsakymas (@RequestParam String pav
@@ -241,8 +248,7 @@ public class MainController {
 		}		
 		return res;
 	}	
-	
-	
+		
 	@GetMapping(path="/salinti-produkta") // Map ONLY GET Requests
 	public @ResponseBody String salintiProdukta (@RequestParam Integer id_pat
 			, @RequestParam Integer id 
@@ -331,22 +337,4 @@ public class MainController {
 		return uzsakymai.isnesiotix();
 	}
 	
-	@GetMapping(path="/top-patiekalai")
-	public @ResponseBody Iterable<TopPatiekalai> getTopPatiekalai(
-			@RequestParam String laikotarpis_nuo
-			, @RequestParam String laikotarpis_iki
-	) {
-		
-//		 Map<String, String> properties = new HashMap<String, String>();
-//		  properties.put("javax.persistence.jdbc.user", "root");
-//		  properties.put("javax.persistence.jdbc.password", "");
-//		  EntityManagerFactory emf = Persistence.createEntityManagerFactory("TopPatiekalaiAtaskaita");   // Persistence.createEntityManagerFactory( "jdbc:mysql://localhost:3306/spring_jpa/kavine;user=root;password=");		
-		
-	    EntityManagerFactory emf = Persistence.createEntityManagerFactory( "TopPatiekalaiAtaskaita" ); // "Eclipselink_JPA" );
-		EntityManager entitymanager = emf.createEntityManager();
-				
-		TopPatiekalaiAtaskaita tp = new TopPatiekalaiAtaskaita( entitymanager );
-
-		return tp.topPatiekalai(laikotarpis_nuo, laikotarpis_iki);
-	}	
 }

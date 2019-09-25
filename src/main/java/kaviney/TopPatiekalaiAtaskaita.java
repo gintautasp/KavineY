@@ -1,25 +1,27 @@
 package kaviney;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
+// import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 
-import javax.persistence.PersistenceContext;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
+// import javax.persistence.PersistenceContext;
+// import javax.persistence.EntityManager;
+// import javax.persistence.Query;
 import javax.persistence.*;
+import org.hibernate.Session;
 
 // import org.springframework.data.repository.CrudRepository;
 // import org.springframework.stereotype.Repository;
 
 //@Repository
 public class TopPatiekalaiAtaskaita {
-	
+	 
       // @Autowired //(unitName="TopPatiekalaiAtaskaita")	
-	  protected EntityManager em;	
+	  protected Session em;	
 	
-	  public TopPatiekalaiAtaskaita(  EntityManager em  ) {
+	  public TopPatiekalaiAtaskaita(  Session em  ) {
 		  
 		    this.em = em;
 	  }	
@@ -54,8 +56,7 @@ public class TopPatiekalaiAtaskaita {
 				+ " ORDER BY"
 				+	   " `uzsakymu` DESC "
 					;
-		  
-		    Query query = em.createQuery(qw_top_patieklai);
+		    Query query = em.createNativeQuery(qw_top_patieklai);
 		    return (List<TopPatiekalai>) query.getResultList();
 	  }	  
 
