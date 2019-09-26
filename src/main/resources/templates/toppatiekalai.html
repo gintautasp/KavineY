@@ -102,16 +102,15 @@
 					<th>už sumą</th>
 				</tr>
 				<tr th:each="top_patiekalas : ${lst_top_patiekalai}">
-					<td th:text="${top_patiekalas.id}"></td>
-					<td th:text="${top_patiekalas.patiekalas}"></td>
-					<td th:text="${top_patiekalas.ruosti}"></td>
-					<td th:text="${top_patiekalas.kaitinti}"></td>
-					<td th:text="${top_patiekalas.kaina}"></td>
-					<td th:text="${top_patiekalas.uzsakymu}"></td>
-					<td th:text="${top_patiekalas.uz_suma}"></td>					
+					<td th:text="${top_patiekalas[0]}"></td>								
+					<td th:text="${top_patiekalas[1]}"></td>				
+					<td th:text="${top_patiekalas[2]}"></td>
+					<td th:text="${top_patiekalas[3]}"></td>
+					<td th:text="${top_patiekalas[4]}"></td>
+					<td th:text="${top_patiekalas[5]}"></td>
+					<td th:text="${top_patiekalas[6]}"></td>
 				</tr>
 			</table>	
-		</div>
-		
+		</div>		
 	</body>
 </html>

@@ -31,32 +31,33 @@ public class TopPatiekalaiAtaskaita {
 		  	String qw_top_patieklai =
 		  				
 		  		"SELECT SQL_CALC_FOUND_ROWS " 
-					+ "`patiekalai`.`id` AS `pat_id` "
-					+ ", `patiekalai`.`pav` AS `patiekalas` "
-					+ ", `patiekalai`.`trukme_ruosimo` AS `ruosti` "
-					+ ", `patiekalai`.`trukme_kaitinimo` AS `kaitinti` "
-					+ ", `patiekalai`.`kaina` AS `kaina_patiek` "
-					+ ", COUNT(*) AS `uzsakymu` "
-					+ ", SUM(`uzsakymai`.`kaina`) AS `uz_suma` "
-					+ ", `uzsakymai`.`pav` AS `pav_uzsakymo` "
+					+ 	"`patiekalai`.`id` AS `pat_id` "
+					+ 	", `patiekalai`.`pav` AS `patiekalas` "
+					+ 	", `patiekalai`.`trukme_ruosimo` AS `ruosti` "
+					+ 	", `patiekalai`.`trukme_kaitinimo` AS `kaitinti` "
+					+ 	", `patiekalai`.`kaina` AS `kaina_patiek` "
+					+ 	", COUNT(*) AS `uzsakymu` "
+					+ 	", SUM(`uzsakymai`.`kaina`) AS `uz_suma` "
+					+ 	", `uzsakymai`.`pav` AS `pav_uzsakymo` "
 					+ "FROM "
-					+ "`patiekalai` "  
+					+ 		"`patiekalai` "  
 					+ "LEFT JOIN "
-					+ "`uzsakymai` ON ( "
+					+ "		`uzsakymai` ON ( "
 					
-					+ 		"`uzsakymai`.`id_patiekalo`=`patiekalai`.`id` "
-					+ ") "
+					+ 			"`uzsakymai`.`id_patiekalo`=`patiekalai`.`id` "
+					+ 		") "
 					+ "WHERE "
 					+ 		"1 "
 					+ "AND "
-					+  		"SUBSTRING( `uzsakymai`.`laikas_uzsakymo`,1, 10 )" + "BETWEEN '" + laikotarpis_nuo + "' AND '" + laikotarpis_iki + "' " 
-	
+					+  		"SUBSTRING( `uzsakymai`.`laikas_uzsakymo`,1, 10 )" 
+								+ " BETWEEN '" + laikotarpis_nuo + "' AND '" + laikotarpis_iki + "' " 	
 				+ " GROUP BY" 
 				+	   " `patiekalai`.`id` "
 				+ " ORDER BY"
 				+	   " `uzsakymu` DESC "
 					;
-		    Query query = em.createNativeQuery(qw_top_patieklai);
+		  	System.out.println ( qw_top_patieklai );
+		    Query query = em.createNativeQuery ( qw_top_patieklai );
 		    return (List<TopPatiekalai>) query.getResultList();
 	  }	  
 

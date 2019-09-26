@@ -1,5 +1,7 @@
 package kaviney;
 
+// import org.springframework.beans.factory.annotation.Bean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -11,14 +13,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import ernadaslinks.Menu;
-
-
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import org.hibernate.cfg.Configuration;
 
 @Controller
-public class GreetingController {
+public class GreetingController {	
 	
-	private static SessionFactory factory;	
+	@Autowired 
+	EntityManagerFactory factory;	
+	
+	// @Bean
+	public SessionFactory sessionFactory() {
+
+		
+	        if (factory.unwrap(SessionFactory.class) == null) {
+	            throw new NullPointerException("factory is not a hibernate factory");
+	        }
+	        return factory.unwrap(SessionFactory.class);
+	}	
 
     @GetMapping("/uzsakymai")
     public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
@@ -79,7 +93,7 @@ public class GreetingController {
 //	    HibernateUtil hibernateUtil = new HibernateUtil();
 		
  
-		      
+		/*      
 		try {
 			
 			factory = new Configuration().configure().buildSessionFactory();
@@ -89,15 +103,16 @@ public class GreetingController {
 			System.err.println("Failed to create sessionFactory object." + ex);
 			throw new ExceptionInInitializerError(ex); 
 		}		
-		
-		Session session = factory.getCurrentSession();
+		*/
+		Session session = this.sessionFactory().openSession(); // factory.getCurrentSession();
 		// String sqlQuery = "select openmode from ";
 		// Query query = session.createNativeQuery(sqlQuery);
 		// List<Object[]> listResults = query.getResultList();
 		
 		TopPatiekalaiAtaskaita top_patieklai_ataskaita =  new TopPatiekalaiAtaskaita( session );
         model.addAttribute("lst_top_patiekalai", top_patieklai_ataskaita.topPatiekalai(laikotarpis_nuo, laikotarpis_iki) ); 		
-		return "info";
+		return "toppatiekalai";
+		// return top_patieklai_ataskaita.topPatiekalai(laikotarpis_nuo, laikotarpis_iki);
 	}
     
     @GetMapping("/inforaides001")
